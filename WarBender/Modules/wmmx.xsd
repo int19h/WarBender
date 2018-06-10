@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="wmdx"
+           targetNamespace="https://int19h.org/WarBender/wmmx.xsd"
+           elementFormDefault="qualified"
+           xmlns="https://int19h.org/WarBender/wmmx.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="identifier">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[A-Za-z_][A-Za-z0-9_]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="groupName">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="\$[A-Za-z_][A-Za-z0-9_]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="integer">
+    <xs:union memberTypes="xs:unsignedLong xs:long">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:pattern value="0x[0-9A-Fa-f]{1,16}"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="primitiveTypeName">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="bool" />
+      <xs:enumeration value="color" />
+      <xs:enumeration value="imod" />
+      <xs:enumeration value="int64" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="entityTypeName">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="faction" />
+      <xs:enumeration value="info_page" />
+      <xs:enumeration value="item_kind" />
+      <xs:enumeration value="map_icon" />
+      <xs:enumeration value="menu" />
+      <xs:enumeration value="mesh" />
+      <xs:enumeration value="particle_system" />
+      <xs:enumeration value="party" />
+      <xs:enumeration value="party_template" />
+      <xs:enumeration value="quest" />
+      <xs:enumeration value="scene" />
+      <xs:enumeration value="string" />
+      <xs:enumeration value="tableau_material" />
+      <xs:enumeration value="troop" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="predefinedTypeName">
+    <xs:union memberTypes="primitiveTypeName entityTypeName"/>
+  </xs:simpleType>
+
+  <xs:complexType name="module">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="slots" type="slots">
+        <xs:unique name="slotIndex">
+          <xs:selector xpath="slot" />
+          <xs:field xpath="@index" />
+        </xs:unique>
+      </xs:element>
+      <xs:element name="enum" type="enumOrFlags" />
+      <xs:element name="flags" type="enumOrFlags" />
+      <xs:element name="groups" type="groups">
+        <xs:unique name="groupName">
+          <xs:selector xpath="group" />
+          <xs:field xpath="@name" />
+        </xs:unique>
+      </xs:element>
+    </xs:choice>
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="version" type="xs:unsignedInt" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="enumOrFlags">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="option" type="option" />
+    </xs:sequence>
+    <xs:attribute name="name" type="identifier"/>
+  </xs:complexType>
+
+  <xs:complexType name="option">
+    <xs:attribute name="name" type="identifier" />
+    <xs:attribute name="value" type="integer" />
+  </xs:complexType>
+
+  <xs:complexType name="slots">
+    <xs:choice>
+      <xs:element name="slot" type="slot" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="array">
+        <xs:complexType>
+          <xs:attribute name="type" type="identifier" default="int64" />
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+    <xs:attribute name="of" type="entityTypeName" />
+    <xs:attribute name="id" use="optional">
+      <xs:simpleType>
+        <xs:list>
+          <xs:simpleType>
+            <xs:union memberTypes="identifier groupName xs:unsignedInt" />
+          </xs:simpleType>
+        </xs:list>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="template-id" use="optional">
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list>
+              <xs:simpleType>
+                <xs:union memberTypes="identifier groupName xs:unsignedInt" />
+              </xs:simpleType>
+            </xs:list>
+          </xs:simpleType>
+          <xs:minLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="slot">
+    <xs:attribute name="index" type="xs:unsignedInt" />
+    <xs:attribute name="name" type="identifier" />
+    <xs:attribute name="type" type="identifier" default="int64" />
+  </xs:complexType>
+
+  <xs:complexType name="groups">
+    <xs:sequence>
+      <xs:element name="group" type="group" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="of" type="entityTypeName" />
+  </xs:complexType>
+
+  <xs:complexType name="group">
+    <xs:attribute name="name" type="groupName" />
+    <xs:attribute name="range">
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list>
+              <xs:simpleType>
+                <xs:union memberTypes="groupName xs:unsignedInt" />
+              </xs:simpleType>
+            </xs:list>
+          </xs:simpleType>
+          <xs:minLength value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:element name="module" type="module">
+    <xs:key name="typeName">
+      <xs:selector xpath="enum | flags" />
+      <xs:field xpath="@name" />
+    </xs:key>
+    <xs:keyref name="typeReference" refer="typeName">
+      <xs:selector xpath="slots | slots/slot" />
+      <xs:field xpath="@type" />
+    </xs:keyref>
+  </xs:element>
+
+</xs:schema>

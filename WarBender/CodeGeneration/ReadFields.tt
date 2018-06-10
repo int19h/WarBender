@@ -1,0 +1,53 @@
+﻿protected override void ReadFields(BinaryReader reader) {
+    var game = this.Game();
+    var bitFieldReader = new BitFieldReader();
+    <#
+    Dim afterBitField = False
+    For Each prop In props 
+        #> 
+        if (<#= prop.Condition #>) {
+            <#
+            If prop.IsDataObject Then
+                If Not prop.IsReadOnly Then
+                    #>
+                    this.<#= prop.Name #> = this.<#= prop.Name #> ?? <#= prop.TypeName #>.Create();
+                    <#
+                End If
+                #>
+                this.<#= prop.Name #>.ReadFrom(reader);
+                <#
+            Else
+                If prop.BitField IsNot Nothing Then
+                    If Not afterBitField Then
+                        #>
+                        bitFieldReader.Start(reader);
+                        <#
+                    End If
+                    #>
+                    this.<#= prop.Name #> = (<#= prop.TypeName #>)bitFieldReader.ReadField(<#= prop.BitField #>);
+                    <#
+                    afterBitField = True
+                Else
+                    #>
+                    this.<#= prop.Name #> = <#= SerializerFor(prop) #>.Read(reader);
+                    <#
+                End If
+            End If
+            #>
+        } else {
+            <#
+            If prop.IsReadOnly Then
+                #>
+                this.<#= prop.Name #>.Clear();
+                <#
+            Else
+                #>
+                this.<#= prop.Name #> = default;
+                <#
+            End If
+            #>
+        }
+        <#
+    Next
+    #> 
+}

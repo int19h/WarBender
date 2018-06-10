@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F3C14A36-B5DC-4341-ADBD-F5340A31FD3A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WarBender</RootNamespace>
+    <AssemblyName>WarBender</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeGeneration\GeneratedCode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneratedCode.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BitFields.cs" />
+    <Compile Include="Modules\GroupDefinition.cs" />
+    <Compile Include="Modules\StringDefinition.cs" />
+    <Compile Include="Modules\MeshDefinition.cs" />
+    <Compile Include="Modules\QuestDefinition.cs" />
+    <Compile Include="Modules\SceneDefinition.cs" />
+    <Compile Include="Modules\VariableDefinition.cs" />
+    <Compile Include="Modules\MapIconDefinition.cs" />
+    <Compile Include="Modules\ParticleSystemDefinition.cs" />
+    <Compile Include="Modules\InfoPageDefinition.cs" />
+    <Compile Include="Modules\MenuDefinition.cs" />
+    <Compile Include="Modules\TableauMaterialDefinition.cs" />
+    <Compile Include="Modules\ItemKindDefinition.cs" />
+    <Compile Include="Modules\PartyDefinition.cs" />
+    <Compile Include="Modules\PartyTemplateDefinition.cs" />
+    <Compile Include="Modules\ModuleMetadata.cs" />
+    <Compile Include="Modules\SlotDefinition.cs" />
+    <Compile Include="NullableSerializer.cs" />
+    <Compile Include="LineReader.cs" />
+    <Compile Include="Modules\EntityDefinition.cs" />
+    <Compile Include="Modules\FactionDefinition.cs" />
+    <Compile Include="CodeGeneration\RecordTypes.cs" />
+    <Compile Include="DataObject.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="EntityRecord.cs" />
+    <Compile Include="ScopeGuard.cs" />
+    <Compile Include="ValueSerializer.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Modules\ModuleSettings.cs" />
+    <Compile Include="Modules\Module.cs" />
+    <Compile Include="Record.cs" />
+    <Compile Include="EnumSerializer.cs" />
+    <Compile Include="Slots.cs" />
+    <Compile Include="Collection.cs" />
+    <Compile Include="GameData\Enums.cs" />
+    <Compile Include="EntityReference.cs" />
+    <Compile Include="Attributes.cs" />
+    <Compile Include="GameData\Records.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\TroopDefinition.cs" />
+    <Compile Include="IOExtensions.cs" />
+    <Compile Include="XmlExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <EmbeddedResource Include="Modules\wmmx.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Native.wmmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <T4Transform Include="CodeGeneration\GeneratedCode.tt">
+      <OutputFilePath>$(ProjectDir)$(IntermediateOutputPath)</OutputFilePath>
+      <OutputFileName>%(T4Transform.FileName).cs</OutputFileName>
+      <FinalOutput>%(T4Transform.RootDir)%(T4Transform.Directory)%(T4Transform.OutputFileName)</FinalOutput>
+    </T4Transform>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <T4ParameterValues Include="TargetPath">
+      <Value>$(TargetPath)</Value>
+      <Visible>False</Visible>
+    </T4ParameterValues>
+    <T4ParameterValues Include="MSBuildToolsPath">
+      <Value>$(MSBuildToolsPath)</Value>
+      <Visible>False</Visible>
+    </T4ParameterValues>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeGeneration\ReadFields.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeGeneration\WriteFields.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeGeneration\ValueSerializer.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeGeneration\Property.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeGeneration\DataObjectFactory.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Modules\py2wmmx.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets" />
+  <Target Name="GenerateSerializers">
+    <ReadLinesFromFile File="@(T4Transform->'%(FinalOutput)')">
+      <Output TaskParameter="Lines" PropertyName="SerializersBefore" />
+    </ReadLinesFromFile>
+    <CallTarget Targets="TransformAll" />
+    <ReadLinesFromFile File="@(T4Transform->'%(OutputFilePath)%(OutputFileName)')">
+      <Output TaskParameter="Lines" PropertyName="SerializersAfter" />
+    </ReadLinesFromFile>
+    <Copy Condition="'$(SerializersBefore)' != '$(SerializersAfter)'" SourceFiles="@(T4Transform->'%(OutputFilePath)%(OutputFileName)')" DestinationFiles="@(T4Transform->'%(FinalOutput)')" />
+  </Target>
+  <Target Name="GenerateSerializersAfterBuild" AfterTargets="Build">
+    <ReadLinesFromFile File="@(T4Transform->'%(FinalOutput)')">
+      <Output TaskParameter="Lines" PropertyName="SerializersBefore" />
+    </ReadLinesFromFile>
+    <CallTarget Targets="GenerateSerializers" />
+    <ReadLinesFromFile File="@(T4Transform->'%(OutputFilePath)%(OutputFileName)')">
+      <Output TaskParameter="Lines" PropertyName="SerializersAfter" />
+    </ReadLinesFromFile>
+    <Message Condition="'$(SerializersBefore)' != '$(SerializersAfter)'" Text="Serializers regenerated; restarting build." Importance="high" />
+    <MSBuild Condition="'$(SerializersBefore)' != '$(SerializersAfter)'" Projects="$(MSBuildProjectFile)" Targets="Build" Properties="Value=$(Value)" />
+  </Target>
+</Project>

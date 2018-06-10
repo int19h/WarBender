@@ -1,0 +1,10 @@
+﻿partial class ValueSerializer : IValueSerializer<<#= serValueType #>> {
+    [GeneratedCode("", "")]
+    private static readonly <#= serTypeName #> <#= serName #> = new <#= serTypeName #>();
+
+    [GeneratedCode("", "")]
+    <#= serValueType #> IValueSerializer<<#= serValueType #>>.Read(BinaryReader reader) => <#= serName #>.Read(reader);
+                    
+    [GeneratedCode("", "")]
+    void IValueSerializer<<#= serValueType #>>.Write(BinaryWriter writer, <#= serValueType #> value) => <#= serName #>.Write(writer, value);
+}

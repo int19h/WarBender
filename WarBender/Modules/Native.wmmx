@@ -1,0 +1,1006 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<module xmlns="https://int19h.org/WarBender/wmmx.xsd"
+        name="Native"
+        version="1000">
+
+  <groups of="troop">
+    <group name="$trp_trainers" range="161 165"/>
+    <group name="$trp_kingdom_heroes_including_player" range="193 462"/>
+    <group name="$trp_npcs" range="194 209"/>
+    <group name="$trp_kingdom_lords" range="210 215"/>
+    <group name="$trp_knights" range="216 335"/>
+    <group name="$trp_knights_1" range="216 235"/>
+    <group name="$trp_kingdom_pretenders" range="336 341"/>
+    <group name="$trp_kingdom_ladies" range="342 462"/>
+    <group name="$trp_town_seneschals" range="464 485"/>
+    <group name="$trp_castle_seneschals" range="486 533"/>
+    <group name="$trp_town_arena_masters" range="534 555"/>
+    <group name="$trp_town_armorers" range="556 577"/>
+    <group name="$trp_town_weaponsmiths" range="578 599"/>
+    <group name="$trp_town_tavernkeepers" range="600 621"/>
+    <group name="$trp_town_merchants" range="622 643"/>
+    <group name="$trp_town_horse_merchants" range="645 666"/>
+    <group name="$trp_town_mayors" range="667 688"/>
+    <group name="$trp_village_elders" range="689 798"/>
+    <group name="$trp_merchants" range="464 798"/>
+    <group name="$trp_town_master_craftsmen" range="800 821"/>
+    <group name="$trp_chests" range="822 828"/>
+    <group name="$trp_temp_arrays" range="829 831"/>
+    <group name="$trp_multiplayer_ai" range="851 868"/>
+    <group name="$trp_multiplayer" range="869 886"/>
+    <group name="$trp_quick_battle_troops" range="897 908"/>
+    <group name="$trp_startup_merchants" range="918 923"/>
+  </groups>
+
+  <groups of="party">
+    <group name="$p_towns" range="21 42"/>
+    <group name="$p_castles" range="43 90"/>
+    <group name="$p_villages" range="91 200"/>
+    <group name="$p_centers" range="21 200"/>
+    <group name="$p_training_grounds" range="206 211"/>
+    <group name="$p_bridges" range="212 225"/>
+    <group name="$p_spawn_points" range="226 234"/>
+  </groups>
+
+  <slots of="faction">
+    <slot index="004" name="faction_ai_state" type="sfai" />
+    <slot index="005" name="faction_ai_object" type="party" />
+    <slot index="006" name="faction_ai_rationale" />
+    <slot index="008" name="faction_marshall" type="troop" />
+    <slot index="009" name="faction_ai_offensive_max_followers" />
+    <slot index="010" name="faction_culture" type="faction" />
+    <slot index="011" name="faction_leader" type="troop"  />
+    <slot index="012" name="faction_temp_slot" />
+    <slot index="015" name="faction_banner" type="mesh" />
+    <slot index="020" name="faction_number_of_parties" />
+    <slot index="021" name="faction_state" type="sfs" />
+    <slot index="022" name="faction_adjective" type="string" />
+    <slot index="030" name="faction_player_alarm" />
+    <slot index="031" name="faction_last_mercenary_offer_time" />
+    <slot index="032" name="faction_recognized_player" type="bool" />
+    <!--<slot index="041" name="faction_quick_battle_tier_1_infantry" />
+    <slot index="042" name="faction_quick_battle_tier_2_infantry" />
+    <slot index="043" name="faction_quick_battle_tier_1_archer" />
+    <slot index="044" name="faction_quick_battle_tier_2_archer" />
+    <slot index="045" name="faction_quick_battle_tier_1_cavalry" />
+    <slot index="046" name="faction_quick_battle_tier_2_cavalry" />-->
+    <slot index="041" name="faction_tier_1_troop" type="troop" />
+    <slot index="042" name="faction_tier_2_troop" type="troop" />
+    <slot index="043" name="faction_tier_3_troop" type="troop" />
+    <slot index="044" name="faction_tier_4_troop" type="troop" />
+    <slot index="045" name="faction_tier_5_troop" type="troop" />
+    <slot index="048" name="faction_deserter_troop" type="troop" />
+    <slot index="049" name="faction_guard_troop" type="troop" />
+    <slot index="050" name="faction_messenger_troop" type="troop" />
+    <slot index="051" name="faction_prison_guard_troop" type="troop" />
+    <slot index="052" name="faction_castle_guard_troop" type="troop" />
+    <slot index="053" name="faction_town_walker_male_troop" type="troop" />
+    <slot index="054" name="faction_town_walker_female_troop" type="troop" />
+    <slot index="055" name="faction_village_walker_male_troop" type="troop" />
+    <slot index="056" name="faction_village_walker_female_troop" type="troop" />
+    <slot index="057" name="faction_town_spy_male_troop" type="troop" />
+    <slot index="058" name="faction_town_spy_female_troop" type="troop" />
+    <slot index="060" name="faction_has_rebellion_chance" type="bool" />
+    <slot index="061" name="faction_instability" />
+    <slot index="062" name="faction_war_damage_inflicted_when_marshal_appointed" />
+    <slot index="063" name="faction_war_damage_suffered_when_marshal_appointed" />
+    <slot index="064" name="faction_political_issue" type="party" />
+    <slot index="065" name="faction_political_issue_time" />
+    <slot index="077" name="faction_reinforcements_a" type="party_template" />
+    <slot index="078" name="faction_reinforcements_b" type="party_template" />
+    <slot index="079" name="faction_reinforcements_c" type="party_template" />
+    <slot index="080" name="faction_num_armies" />
+    <slot index="081" name="faction_num_castles" />
+    <slot index="082" name="faction_num_towns" />
+    <slot index="085" name="faction_last_attacked_center" type="party" />
+    <slot index="086" name="faction_last_attacked_hours" />
+    <slot index="087" name="faction_last_safe_hours" />
+    <slot index="090" name="faction_num_routed_agents" />
+    <slot index="091" name="faction_biggest_feast_score" />
+    <slot index="092" name="faction_biggest_feast_time" />
+    <slot index="093" name="faction_biggest_feast_host" />
+    <slot index="094" name="faction_last_feast_concluded" />
+    <!--<slot index="094" name="faction_last_feast_start_time" />-->
+    <slot index="095" name="faction_ai_last_offensive_time" />
+    <!--<slot index="095" name="faction_last_offensive_concluded" />-->
+    <slot index="096" name="faction_ai_last_rest_time" />
+    <slot index="097" name="faction_ai_current_state_started" />
+    <slot index="098" name="faction_ai_last_decisive_event" />
+    <slot index="099" name="faction_morale_of_player_troops" />
+    <slot index="120" name="faction_truce_days_with_factions_begin" />
+    <slot index="130" name="faction_provocation_days_with_factions_begin" />
+    <slot index="140" name="faction_war_damage_inflicted_on_factions_begin" />
+    <slot index="150" name="faction_sum_advice_about_factions_begin" />
+  </slots>
+
+  <slots of="info_page">
+  </slots>
+
+  <slots of="item_kind">
+    <slot index="00" name="item_is_checked" type="bool" />
+    <slot index="01" name="item_food_bonus" />
+    <slot index="02" name="item_book_reading_progress" />
+    <slot index="03" name="item_book_read" type="bool" />
+    <slot index="04" name="item_intelligence_requirement" />
+    <slot index="07" name="item_amount_available" />
+    <slot index="11" name="item_urban_demand" />
+    <slot index="12" name="item_rural_demand" />
+    <slot index="13" name="item_desert_demand" />
+    <slot index="14" name="item_production_slot" />
+    <slot index="15" name="item_production_string" type="string" />
+    <slot index="20" name="item_tied_to_good_price" type="item_kind" />
+    <slot index="22" name="item_num_positions" />
+    <slot index="23" name="item_positions_begin" />
+    <slot index="30" name="item_multiplayer_faction_price_multipliers_begin" />
+    <slot index="50" name="item_primary_raw_material" type="item_kind" />
+    <slot index="51" name="item_is_raw_material_only_for" type="item_kind" />
+    <slot index="52" name="item_input_number" />
+    <slot index="53" name="item_base_price" />
+    <slot index="55" name="item_output_per_run" />
+    <slot index="56" name="item_overhead_per_run" />
+    <slot index="57" name="item_secondary_raw_material" type="item_kind" />
+    <slot index="58" name="item_enterprise_building_cost" />
+    <slot index="59" name="item_ccoop_has_ammo" type="bool" />
+    <slot index="60" name="item_multiplayer_item_class" />
+    <slot index="61" name="item_multiplayer_availability_linked_list_begin" />
+  </slots>
+
+  <slots of="party">
+    <slot index="000" name="party_type" type="spt" />
+    <slot index="002" name="party_retreat_flag" type="bool" />
+    <slot index="003" name="party_ignore_player_until" />
+    <slot index="004" name="party_ai_state" type="spai" />
+    <slot index="005" name="party_ai_object" type="party" />
+    <slot index="006" name="party_ai_rationale" />
+    <slot index="008" name="party_ai_substate" />
+    <slot index="030" name="party_commander_party" type="party" />
+    <slot index="031" name="party_following_player" type="bool" />
+    <slot index="032" name="party_follow_player_until_time" />
+    <slot index="033" name="party_dont_follow_player_until_time" />
+    <slot index="052" name="party_last_toll_paid_hours" />
+    <slot index="053" name="party_food_store" />
+    <slot index="056" name="party_cached_strength" />
+    <slot index="057" name="party_nearby_friend_strength" />
+    <slot index="058" name="party_nearby_enemy_strength" />
+    <slot index="059" name="party_follower_strength" />
+    <slot index="063" name="party_follow_me" type="bool" />
+    <slot index="068" name="party_last_in_combat" />
+    <slot index="069" name="party_last_in_home_center" />
+    <slot index="070" name="party_leader_last_courted" />
+    <slot index="071" name="party_last_in_any_center" />
+    <slot index="109" name="party_next_looted_item_slot" />
+    <slot index="110" name="party_looted_item_1" type="item_kind" />
+    <slot index="111" name="party_looted_item_2" type="item_kind" />
+    <slot index="112" name="party_looted_item_3" type="item_kind" />
+    <slot index="113" name="party_looted_item_4" type="item_kind" />
+    <slot index="114" name="party_looted_item_5" type="item_kind" />
+    <slot index="115" name="party_looted_item_1_modifier" type="imod" />
+    <slot index="116" name="party_looted_item_2_modifier" type="imod" />
+    <slot index="117" name="party_looted_item_3_modifier" type="imod" />
+    <slot index="118" name="party_looted_item_4_modifier" type="imod" />
+    <slot index="119" name="party_looted_item_5_modifier" type="imod" />
+    <slot index="123" name="party_home_center" type="party" />
+    <slot index="126" name="party_last_traded_center" type="party" />
+    <slot index="244" name="party_following_orders_of_troop" type="troop" />
+    <slot index="245" name="party_orders_type" type="spai"  />
+    <slot index="246" name="party_orders_object" type="party" />
+    <slot index="247" name="party_orders_time" />
+    <slot index="248" name="party_temp_slot_1" />
+    <slot index="249" name="party_under_player_suggestion" type="bool" />
+  </slots>
+
+  <slots of="party" template-id="pt_cattle_herd">
+    <slot index="007" name="cattle_driven_by_player" type="bool" />
+  </slots>
+
+  <slots of="party" id="$p_centers">
+    <slot index="007" name="town_lord" />
+    <slot index="009" name="town_claimed_by_player" type="bool" />
+    <slot index="010" name="town_center" type="scene" />
+    <slot index="011" name="town_castle" type="scene" />
+    <slot index="012" name="town_prison" type="scene" />
+    <slot index="013" name="town_tavern" type="scene" />
+    <slot index="014" name="town_store" type="scene" />
+    <slot index="016" name="town_arena" type="scene" />
+    <slot index="017" name="town_alley" type="scene" />
+    <slot index="018" name="town_walls" type="scene" />
+    <slot index="019" name="center_culture" type="faction" />
+    <slot index="020" name="town_tavernkeeper" type="troop" />
+    <slot index="021" name="town_weaponsmith" type="troop" />
+    <slot index="022" name="town_armorer" type="troop" />
+    <slot index="023" name="town_merchant" type="troop" />
+    <slot index="024" name="town_horse_merchant" type="troop" />
+    <slot index="025" name="town_elder" type="troop" />
+    <slot index="026" name="center_player_relation" />
+    <slot index="027" name="center_siege_with_belfry" />
+    <slot index="028" name="center_last_taken_by_troop" type="troop" />
+    <slot index="041" name="center_last_visited_by_lord" />
+    <slot index="042" name="center_last_player_alarm_hour" />
+    <slot index="047" name="center_accumulated_rents" />
+    <slot index="048" name="center_accumulated_tariffs" />
+    <slot index="049" name="town_wealth" />
+    <slot index="050" name="town_prosperity" />
+    <slot index="051" name="town_player_odds" />
+    <slot index="054" name="center_is_besieged_by" type="party" />
+    <slot index="055" name="center_last_spotted_enemy" />
+    <slot index="060" name="town_reinforcement_party_template" type="party_template" />
+    <slot index="061" name="center_original_faction" type="faction" />
+    <slot index="062" name="center_ex_faction" type="faction" />
+    <slot index="064" name="center_siege_begin_hours" />
+    <slot index="065" name="center_siege_hardness" />
+    <slot index="066" name="center_sortie_strength" />
+    <slot index="067" name="center_sortie_enemy_strength" />
+    <slot index="076" name="town_village_product" type="item_kind" />
+    <slot index="077" name="town_rebellion_readiness" />
+    <slot index="078" name="town_arena_melee_mission_tpl" />
+    <slot index="079" name="town_arena_torny_mission_tpl" />
+    <slot index="080" name="town_arena_melee_1_num_teams" />
+    <slot index="081" name="town_arena_melee_1_team_size" />
+    <slot index="082" name="town_arena_melee_2_num_teams" />
+    <slot index="083" name="town_arena_melee_2_team_size" />
+    <slot index="084" name="town_arena_melee_3_num_teams" />
+    <slot index="085" name="town_arena_melee_3_team_size" />
+    <slot index="086" name="town_arena_melee_cur_tier" />
+    <slot index="090" name="center_npc_volunteer_troop_type" type="troop" />
+    <slot index="091" name="center_npc_volunteer_troop_amount" />
+    <!--<slot index="090" name="center_mercenary_troop_type" />
+    <slot index="091" name="center_mercenary_troop_amount" />-->
+    <slot index="092" name="center_volunteer_troop_type" type="troop" />
+    <slot index="093" name="center_volunteer_troop_amount" />
+    <slot index="095" name="center_ransom_broker" type="troop" />
+    <slot index="096" name="center_tavern_traveler" type="troop" />
+    <slot index="097" name="center_traveler_info_faction" type="faction" />
+    <slot index="098" name="center_tavern_bookseller" type="troop" />
+    <slot index="099" name="center_tavern_minstrel" type="troop" />
+    <slot index="124" name="center_current_improvement" type="cci" />
+    <slot index="125" name="center_improvement_end_hour" />
+    <slot index="130" name="center_has_manor" type="bool" />
+    <slot index="131" name="center_has_fish_pond" type="bool"  />
+    <slot index="132" name="center_has_watch_tower" type="bool"  />
+    <slot index="133" name="center_has_school" type="bool"  />
+    <slot index="134" name="center_has_messenger_post" type="bool"  />
+    <slot index="135" name="center_has_prisoner_tower" type="bool"  />
+    <slot index="137" name="center_player_enterprise" type="item_kind" />
+    <slot index="138" name="center_player_enterprise_production_order" />
+    <slot index="139" name="center_player_enterprise_days_until_complete" />
+    <slot index="140" name="center_player_enterprise_balance" />
+    <slot index="141" name="center_player_enterprise_input_price" />
+    <slot index="142" name="center_player_enterprise_output_price" />
+    <slot index="155" name="center_has_bandits" type="troop" />
+    <slot index="156" name="town_has_tournament" type="bool" />
+    <slot index="157" name="town_tournament_max_teams" />
+    <slot index="158" name="town_tournament_max_team_size" />
+    <slot index="159" name="center_faction_when_oath_renounced" type="faction" />
+    <slot index="160" name="center_walker_0_troop" type="troop" />
+    <slot index="161" name="center_walker_1_troop" type="troop" />
+    <slot index="162" name="center_walker_2_troop" type="troop" />
+    <slot index="163" name="center_walker_3_troop" type="troop" />
+    <slot index="164" name="center_walker_4_troop" type="troop" />
+    <slot index="165" name="center_walker_5_troop" type="troop" />
+    <slot index="166" name="center_walker_6_troop" type="troop" />
+    <slot index="167" name="center_walker_7_troop" type="troop" />
+    <slot index="168" name="center_walker_8_troop" type="troop" />
+    <slot index="169" name="center_walker_9_troop" type="troop" />
+    <slot index="170" name="center_walker_0_dna" />
+    <slot index="171" name="center_walker_1_dna" />
+    <slot index="172" name="center_walker_2_dna" />
+    <slot index="173" name="center_walker_3_dna" />
+    <slot index="174" name="center_walker_4_dna" />
+    <slot index="175" name="center_walker_5_dna" />
+    <slot index="176" name="center_walker_6_dna" />
+    <slot index="177" name="center_walker_7_dna" />
+    <slot index="178" name="center_walker_8_dna" />
+    <slot index="179" name="center_walker_9_dna" />
+    <slot index="180" name="center_walker_0_type" type="walkert" />
+    <slot index="181" name="center_walker_1_type" type="walkert" />
+    <slot index="182" name="center_walker_2_type" type="walkert" />
+    <slot index="183" name="center_walker_3_type" type="walkert" />
+    <slot index="184" name="center_walker_4_type" type="walkert" />
+    <slot index="185" name="center_walker_5_type" type="walkert" />
+    <slot index="186" name="center_walker_6_type" type="walkert" />
+    <slot index="187" name="center_walker_7_type" type="walkert" />
+    <slot index="188" name="center_walker_8_type" type="walkert" />
+    <slot index="189" name="center_walker_9_type" type="walkert" />
+    <slot index="190" name="town_trade_route_1" type="party" />
+    <slot index="191" name="town_trade_route_2" type="party" />
+    <slot index="192" name="town_trade_route_3" type="party" />
+    <slot index="193" name="town_trade_route_4" type="party" />
+    <slot index="194" name="town_trade_route_5" type="party" />
+    <slot index="195" name="town_trade_route_6" type="party" />
+    <slot index="196" name="town_trade_route_7" type="party" />
+    <slot index="197" name="town_trade_route_8" type="party" />
+    <slot index="198" name="town_trade_route_9" type="party" />
+    <slot index="199" name="town_trade_route_10" type="party" />
+    <slot index="200" name="town_trade_route_11" type="party" />
+    <slot index="201" name="town_trade_route_12" type="party" />
+    <slot index="202" name="town_trade_route_13" type="party" />
+    <slot index="203" name="town_trade_route_14" type="party" />
+    <slot index="204" name="town_trade_route_15" type="party" />
+    <!--<slot index="190" name="town_trade_routes_begin" />
+    <slot index="205" name="town_trade_routes_end" />-->
+    <slot index="500" name="town_trade_good_productions_begin" />
+    <!--<slot index="205" name="village_number_of_cattle" />-->
+    <slot index="205" name="center_head_cattle" />
+    <slot index="206" name="center_head_sheep" />
+    <slot index="207" name="center_head_horses" />
+    <slot index="208" name="center_acres_pasture" />
+    <!--<slot index="209" name="production_sources_begin" />-->
+    <slot index="209" name="center_acres_grain" />
+    <slot index="210" name="center_acres_olives" />
+    <slot index="211" name="center_acres_vineyard" />
+    <slot index="212" name="center_acres_flax" />
+    <slot index="213" name="center_acres_dates" />
+    <slot index="214" name="center_fishing_fleet" />
+    <slot index="215" name="center_salt_pans" />
+    <slot index="216" name="center_apiaries" />
+    <slot index="217" name="center_silk_farms" />
+    <slot index="218" name="center_kirmiz_farms" />
+    <slot index="219" name="center_iron_deposits" />
+    <slot index="220" name="center_fur_traps" />
+    <slot index="221" name="center_mills" />
+    <slot index="222" name="center_breweries" />
+    <slot index="223" name="center_wine_presses" />
+    <slot index="224" name="center_olive_presses" />
+    <slot index="225" name="center_linen_looms" />
+    <slot index="226" name="center_silk_looms" />
+    <slot index="227" name="center_wool_looms" />
+    <slot index="228" name="center_pottery_kilns" />
+    <slot index="229" name="center_smithies" />
+    <slot index="230" name="center_tanneries" />
+    <slot index="231" name="center_shipyards" />
+    <slot index="232" name="center_household_gardens" />
+    <slot index="233" name="production_sources_end" />
+    <slot index="240" name="town_last_nearby_fire_time" />
+    <slot index="250" name="town_trade_good_prices_begin" />
+    <slot index="350" name="center_last_reconnoitered_by_faction_time" />
+  </slots>
+
+  <slots of="party" id="$p_villages">
+    <slot index="034" name="village_raided_by" type="party" />
+    <slot index="035" name="village_state" type="svs" />
+    <slot index="036" name="village_raid_progress" />
+    <slot index="037" name="village_recover_progress" />
+    <slot index="038" name="village_smoke_added" type="bool" />
+    <slot index="039" name="village_infested_by_bandits" type="bool" />
+    <slot index="046" name="village_player_can_not_steal_cattle" type="bool" />
+    <slot index="120" name="village_bound_center" type="party" />
+    <slot index="121" name="village_market_town" type="party" />
+    <slot index="122" name="village_farmer_party" type="party" />
+  </slots>
+
+  <slots of="party_template">
+    <slot index="1" name="party_template_num_killed" />
+    <slot index="3" name="party_template_lair_type" type="party_template" />
+    <slot index="4" name="party_template_lair_party" type="party" />
+    <slot index="5" name="party_template_lair_spawnpoint"  type="party" />
+  </slots>
+
+  <slots of="quest">
+    <slot index="1" name="quest_target_center" type="party" />
+    <slot index="2" name="quest_target_troop" type="troop" />
+    <slot index="3" name="quest_target_faction" type="faction" />
+    <slot index="4" name="quest_object_troop" type="troop" />
+    <slot index="6" name="quest_giver_troop" type="troop" />
+    <slot index="7" name="quest_object_center" type="party" />
+    <slot index="8" name="quest_target_party" type="party" />
+    <slot index="9" name="quest_target_party_template" type="party_template" />
+    <slot index="10" name="quest_target_amount" />
+    <slot index="11" name="quest_current_state" />
+    <slot index="12" name="quest_giver_center" type="party" />
+    <slot index="13" name="quest_target_dna" />
+    <slot index="14" name="quest_target_item" type="item_kind" />
+    <slot index="15" name="quest_object_faction" type="faction" />
+    <slot index="16" name="quest_target_state" />
+    <slot index="17" name="quest_object_state" />
+    <slot index="19" name="quest_convince_value" />
+    <slot index="20" name="quest_importance" />
+    <slot index="21" name="quest_xp_reward" />
+    <slot index="22" name="quest_gold_reward" />
+    <slot index="23" name="quest_expiration_days" />
+    <slot index="24" name="quest_dont_give_again_period" />
+    <slot index="25" name="quest_dont_give_again_remaining_days" />
+    <slot index="26" name="quest_failure_consequence" />
+    <slot index="27" name="quest_temp_slot" />
+  </slots>
+
+  <slots of="scene">
+    <slot index="0" name="scene_visited" type="bool" />
+    <slot index="1" name="scene_ccoop_disallow_horses" type="bool" />
+    <slot index="10" name="scene_belfry_props_begin" />
+  </slots>
+
+  <slots of="troop">
+    <slot index="002" name="troop_occupation" type="slto" />
+    <slot index="003" name="troop_state" />
+    <slot index="004" name="troop_last_talk_time" />
+    <slot index="005" name="troop_met" type="bool" />
+    <slot index="006" name="troop_party_template" type="party_template" />
+    <slot index="007" name="troop_renown" />
+    <slot index="008" name="troop_prisoner_of_party" type="party" />
+    <slot index="009" name="troop_present_at_event" /><!-- index into log_entries -->
+    <slot index="010" name="troop_leaded_party" type="party" />
+    <slot index="011" name="troop_wealth" />
+    <slot index="012" name="troop_cur_center" type="party" />
+    <slot index="013" name="troop_banner_scene_prop" type="mesh" />
+    <slot index="014" name="troop_original_faction" type="faction" />
+    <slot index="016" name="troop_player_order_state" type="spai" />
+    <slot index="017" name="troop_player_order_object" type="party" />
+    <slot index="018" name="troop_age" />
+    <slot index="019" name="troop_age_appearance" />
+    <slot index="020" name="troop_does_not_give_quest" type="bool" />
+    <slot index="021" name="troop_player_debt" />
+    <slot index="022" name="troop_player_relation" />
+    <slot index="024" name="troop_last_quest" type="quest" />
+    <slot index="025" name="troop_last_quest_betrayed" type="bool" />
+    <slot index="026" name="troop_last_persuasion_time" />
+    <slot index="027" name="troop_last_comment_time" />
+    <slot index="028" name="troop_spawned_before" type="bool" />
+    <slot index="029" name="troop_last_comment_slot" />
+    <slot index="030" name="troop_spouse" type="troop" />
+    <slot index="031" name="troop_father" type="troop" />
+    <slot index="032" name="troop_mother" type="troop" />
+    <slot index="033" name="troop_guardian" type="troop" />
+    <slot index="034" name="troop_betrothed" type="troop" />
+    <slot index="035" name="troop_love_interest_1" type="troop" />
+    <slot index="036" name="troop_love_interest_2" type="troop" />
+    <slot index="037" name="troop_love_interest_3" type="troop" />
+    <!--<slot index="038" name="troop_love_interests_end" />-->
+    <slot index="038" name="lord_granted_courtship_permission" type="bool" />
+    <slot index="039" name="troop_betrothal_time" />
+    <slot index="045" name="troop_current_rumor" />
+    <slot index="046" name="troop_temp_slot" />
+    <slot index="047" name="troop_promised_fief" type="party" />
+    <slot index="048" name="troop_set_decision_seed" />
+    <slot index="049" name="troop_temp_decision_seed" />
+    <slot index="050" name="troop_recruitment_random" />
+    <slot index="051" name="troop_intrigue_impatience" />
+    <slot index="055" name="troop_change_to_faction" type="faction" />
+    <slot index="146" name="troop_player_routed_agents" />
+    <slot index="147" name="troop_ally_routed_agents" />
+    <slot index="148" name="troop_enemy_routed_agents" />
+    <slot index="149" name="troop_mission_participation" type="mp" />
+    <slot index="150" name="troop_controversy" />
+    <slot index="151" name="troop_recent_offense_type" type="tro" />
+    <slot index="152" name="troop_recent_offense_object" type="troop" />
+    <slot index="153" name="troop_recent_offense_time" />
+    <slot index="154" name="troop_stance_on_faction_issue" type="troop" />
+    <slot index="155" name="troop_coop_lord_spawned" />
+    <slot index="156" name="troop_mp_squad_type" />
+    <slot index="161" name="troop_will_join_prison_break" type="bool" />
+  </slots>
+
+  <slots of="troop" id="$trp_kingdom_heroes_including_player">
+    <slot index="052" name="lord_reputation_type" type="lrep" />
+    <slot index="053" name="lord_recruitment_argument" type="argument" />
+    <slot index="054" name="lord_recruitment_candidate" type="troop" />
+  </slots>
+
+  <slots of="troop" id="$trp_npcs">
+    <slot index="059" name="troop_first_encountered" type="party" />
+    <slot index="060" name="troop_home" type="party" />
+    <slot index="061" name="troop_morality_state" type="tms" />
+    <slot index="062" name="troop_morality_type" type="tmt" />
+    <slot index="063" name="troop_morality_value" />
+    <slot index="064" name="troop_2ary_morality_type" type="tmt" />
+    <slot index="065" name="troop_2ary_morality_state" type="tms" />
+    <slot index="066" name="troop_2ary_morality_value" />
+    <slot index="067" name="troop_town_with_contacts" type="party" />
+    <slot index="068" name="troop_town_contact_type" type="tct" />
+    <slot index="069" name="troop_morality_penalties" />
+    <slot index="071" name="troop_personalityclash_object" type="troop" />
+    <slot index="072" name="troop_personalityclash_state" type="pclash" />
+    <slot index="073" name="troop_personalityclash2_object" type="troop" />
+    <slot index="074" name="troop_personalityclash2_state" type="pclash" />
+    <slot index="075" name="troop_personalitymatch_object" type="troop" />
+    <slot index="076" name="troop_personalitymatch_state" type="pclash" />
+    <slot index="077" name="troop_personalityclash_penalties" />
+    <slot index="078" name="troop_home_speech_delivered" type="bool" />
+    <slot index="080" name="troop_met_previously" type="bool" />
+    <slot index="081" name="troop_turned_down_twice" type="bool" />
+    <slot index="082" name="troop_playerparty_history" type="pp_history" />
+    <slot index="083" name="troop_playerparty_history_string" type="string" />
+    <slot index="084" name="troop_return_renown" />
+    <slot index="085" name="troop_custom_banner_bg_color_1" type="color" />
+    <slot index="086" name="troop_custom_banner_bg_color_2" type="color" />
+    <slot index="087" name="troop_custom_banner_charge_color_1" type="color" />
+    <slot index="088" name="troop_custom_banner_charge_color_2" type="color" />
+    <slot index="089" name="troop_custom_banner_charge_color_3" type="color" />
+    <slot index="090" name="troop_custom_banner_charge_color_4" type="color" />
+    <slot index="091" name="troop_custom_banner_bg_type" />
+    <slot index="092" name="troop_custom_banner_charge_type_1" type="color" />
+    <slot index="093" name="troop_custom_banner_charge_type_2" type="color" />
+    <slot index="094" name="troop_custom_banner_charge_type_3" type="color" />
+    <slot index="095" name="troop_custom_banner_charge_type_4" type="color" />
+    <slot index="096" name="troop_custom_banner_flag_type" />
+    <slot index="097" name="troop_custom_banner_num_charges" />
+    <slot index="098" name="troop_custom_banner_positioning" />
+    <slot index="099" name="troop_custom_banner_map_flag_type" />
+    <slot index="101" name="troop_intro" type="string" />
+    <slot index="102" name="troop_intro_response_1" type="string" />
+    <slot index="103" name="troop_intro_response_2" type="string"  />
+    <slot index="104" name="troop_backstory_a" type="string"  />
+    <slot index="105" name="troop_backstory_b" type="string"  />
+    <slot index="106" name="troop_backstory_c" type="string"  />
+    <slot index="107" name="troop_backstory_delayed" type="string"  />
+    <slot index="108" name="troop_backstory_response_1" type="string"  />
+    <slot index="109" name="troop_backstory_response_2" type="string"  />
+    <slot index="110" name="troop_signup" type="string"  />
+    <slot index="111" name="troop_signup_2" type="string"  />
+    <slot index="112" name="troop_signup_response_1" type="string"  />
+    <slot index="113" name="troop_signup_response_2" type="string"  />
+    <slot index="114" name="troop_mentions_payment" type="string"  />
+    <slot index="115" name="troop_payment_response" type="string"  />
+    <slot index="116" name="troop_morality_speech" type="string"  />
+    <slot index="117" name="troop_2ary_morality_speech" type="string"  />
+    <slot index="118" name="troop_personalityclash_speech" type="string"  />
+    <slot index="119" name="troop_personalityclash_speech_b" type="string"  />
+    <slot index="120" name="troop_personalityclash2_speech" type="string"  />
+    <slot index="121" name="troop_personalityclash2_speech_b" type="string"  />
+    <slot index="122" name="troop_personalitymatch_speech" type="string"  />
+    <slot index="123" name="troop_personalitymatch_speech_b" type="string"  />
+    <slot index="124" name="troop_retirement_speech" type="string"  />
+    <slot index="125" name="troop_rehire_speech" type="string"  />
+    <slot index="126" name="troop_home_intro" type="string"  />
+    <slot index="127" name="troop_home_description" type="string"  />
+    <slot index="128" name="troop_home_description_2" type="string"  />
+    <slot index="129" name="troop_home_recap" type="string"  />
+    <slot index="130" name="troop_honorific" type="string"  />
+    <slot index="131" name="troop_kingsupport_string_1" type="string"  />
+    <slot index="132" name="troop_kingsupport_string_2" type="string"  />
+    <slot index="133" name="troop_kingsupport_string_2a" type="string"  />
+    <slot index="134" name="troop_kingsupport_string_2b" type="string"  />
+    <slot index="135" name="troop_kingsupport_string_3" type="string"  />
+    <slot index="136" name="troop_kingsupport_objection_string" type="string"  />
+    <slot index="137" name="troop_intel_gathering_string" type="string"  />
+    <slot index="138" name="troop_fief_acceptance_string" type="string"  />
+    <slot index="139" name="troop_woman_to_woman_string"  type="string" />
+    <slot index="140" name="troop_turn_against_string" type="string"  />
+    <!--<slot index="141" name="troop_strings_end" />-->
+    <slot index="141" name="troop_payment_request" />
+    <slot index="142" name="troop_kingsupport_state" />
+    <slot index="143" name="troop_kingsupport_argument" />
+    <slot index="144" name="troop_kingsupport_opponent" />
+    <slot index="145" name="troop_kingsupport_objection_state" />
+    <slot index="150" name="troop_days_on_mission" />
+    <slot index="151" name="troop_current_mission" type="npc_mission" />
+    <slot index="152" name="troop_mission_object"  type="faction" />
+  </slots>
+
+  <slots of="troop" id="$trp_kingdom_ladies">
+    <slot index="005" name="troop_courtship_state" type="tcs" />
+    <slot index="037" name="lady_no_messages" type="bool" />
+    <slot index="038" name="lady_last_suitor" type="troop" />
+    <slot index="040" name="lady_used_tournament" type="bool" />
+    <slot index="074" name="lady_courtship_heroic_recited" type="bool" />
+    <slot index="075" name="lady_courtship_allegoric_recited" type="bool" />
+    <slot index="076" name="lady_courtship_comic_recited" type="bool" />
+    <slot index="077" name="lady_courtship_mystic_recited" type="bool" />
+    <slot index="078" name="lady_courtship_tragic_recited" type="bool" />
+  </slots>
+
+  <slots of="troop" id="$trp_kingdom_pretenders">
+    <slot index="078" name="troop_discussed_rebellion" type="bool" />
+  </slots>
+
+  <slots of="troop" id="$trp_trainers">
+    <slot index="030" name="troop_trainer_met" />
+    <slot index="031" name="troop_trainer_waiting_for_result" />
+    <slot index="032" name="troop_trainer_training_fight_won" />
+    <slot index="033" name="troop_trainer_num_opponents_to_beat" />
+    <slot index="034" name="troop_trainer_training_system_explained" />
+    <slot index="035" name="troop_trainer_opponent_troop" />
+    <slot index="036" name="troop_trainer_training_difficulty" />
+    <slot index="037" name="troop_trainer_training_fight_won" />
+  </slots>
+
+  <slots of="troop"
+         id="trp_banner_background_color_array trp_log_array_entry_time trp_log_array_actor
+             trp_temp_array_a trp_temp_array_b trp_temp_array_c trp_stack_selection_amounts
+             trp_stack_selection_ids trp_notification_menu_types trp_notification_menu_var1
+             trp_notification_menu_var2">
+    <array />
+  </slots>
+
+  <slots of="troop" id="trp_banner_background_color_array">
+    <array type="color" />
+  </slots>
+
+  <slots of="troop" id="trp_log_array_entry_type">
+    <array type="logent" />
+  </slots>
+
+  <enum name="spt">
+    <option name="spt_castle" value="2" />
+    <option name="spt_town" value="3" />
+    <option name="spt_village" value="4" />
+    <option name="spt_kingdom_caravan" value="11" />
+    <option name="spt_kingdom_hero_party" value="13" />
+    <option name="spt_village_farmer" value="15" />
+    <option name="spt_ship" value="16" />
+    <option name="spt_cattle_herd" value="17" />
+    <option name="spt_bandit_lair" value="18" />
+  </enum>
+
+  <enum name="sfs">
+    <option name="sfs_active" value="0" />
+    <option name="sfs_defeated" value="1" />
+    <option name="sfs_inactive" value="2" />
+    <option name="sfs_inactive_rebellion" value="3" />
+    <option name="sfs_beginning_rebellion" value="4" />
+  </enum>
+
+  <enum name="sfai">
+    <option name="sfai_default" value="0" />
+    <option name="sfai_gathering_army" value="1" />
+    <option name="sfai_attacking_center" value="2" />
+    <option name="sfai_raiding_village" value="3" />
+    <option name="sfai_attacking_enemy_army" value="4" />
+    <option name="sfai_attacking_enemies_around_center" value="5" />
+    <option name="sfai_feast" value="6" />
+    <option name="sfai_nascent_rebellion" value="7" />
+  </enum>
+
+  <enum name="spai">
+    <option name="spai_undefined" value="-1" />
+    <option name="spai_besieging_center" value="1" />
+    <option name="spai_patrolling_around_center" value="4" />
+    <option name="spai_raiding_around_center" value="5" />
+    <option name="spai_holding_center" value="7" />
+    <option name="spai_engaging_army" value="10" />
+    <option name="spai_accompanying_army" value="11" />
+    <option name="spai_screening_army" value="12" />
+    <option name="spai_trading_with_town" value="13" />
+    <option name="spai_retreating_to_center" value="14" />
+    <option name="spai_visiting_village" value="16" />
+  </enum>
+
+  <enum name="svs">
+    <option name="svs_normal" value="0" />
+    <option name="svs_being_raided" value="1" />
+    <option name="svs_looted" value="2" />
+    <option name="svs_recovering" value="3" />
+    <option name="svs_deserted" value="4" />
+    <option name="svs_under_siege" value="5" />
+  </enum>
+
+  <enum name="pis">
+    <option name="pis_normal" value="0" />
+    <option name="pis_camping" value="1" />
+    <option name="pis_ship" value="2" />
+  </enum>
+
+  <enum name="argument">
+    <option name="argument_none" value="0" />
+    <option name="argument_claim" value="1" />
+    <option name="argument_legal" value="1" />
+    <option name="argument_ruler" value="2" />
+    <option name="argument_commons" value="2" />
+    <option name="argument_benefit" value="3" />
+    <option name="argument_reward" value="3" />
+    <option name="argument_victory" value="4" />
+    <option name="argument_lords" value="5" />
+    <option name="argument_rivalries" value="6" />
+  </enum>
+
+  <enum name="lrep">
+    <option name="lrep_none" value="0" />
+    <option name="lrep_martial" value="1" />
+    <option name="lrep_quarrelsome" value="2" />
+    <option name="lrep_selfrighteous" value="3" />
+    <option name="lrep_cunning" value="4" />
+    <option name="lrep_debauched" value="5" />
+    <option name="lrep_goodnatured" value="6" />
+    <option name="lrep_upstanding" value="7" />
+    <option name="lrep_roguish" value="8" />
+    <option name="lrep_benefactor" value="9" />
+    <option name="lrep_custodian" value="10" />
+    <option name="lrep_conventional" value="21" />
+    <option name="lrep_adventurous" value="22" />
+    <option name="lrep_otherworldly" value="23" />
+    <option name="lrep_ambitious" value="24" />
+    <option name="lrep_moralist" value="25" />
+  </enum>
+
+  <enum name="logent">
+    <option name="logent_village_raided" value="1" />
+    <option name="logent_village_extorted" value="2" />
+    <option name="logent_caravan_accosted" value="3" />
+    <option name="logent_traveller_attacked" value="3" />
+    <option name="logent_helped_peasants" value="4" />
+    <option name="logent_party_traded" value="5" />
+    <option name="logent_castle_captured_by_player" value="10" />
+    <option name="logent_lord_defeated_by_player" value="11" />
+    <option name="logent_lord_captured_by_player" value="12" />
+    <option name="logent_lord_defeated_but_let_go_by_player" value="13" />
+    <option name="logent_player_defeated_by_lord" value="14" />
+    <option name="logent_player_retreated_from_lord" value="15" />
+    <option name="logent_player_retreated_from_lord_cowardly" value="16" />
+    <option name="logent_lord_helped_by_player" value="17" />
+    <option name="logent_player_participated_in_siege" value="18" />
+    <option name="logent_player_participated_in_major_battle" value="19" />
+    <option name="logent_castle_given_to_lord_by_player" value="20" />
+    <option name="logent_pledged_allegiance" value="21" />
+    <option name="logent_liege_grants_fief_to_vassal" value="22" />
+    <option name="logent_renounced_allegiance" value="23" />
+    <option name="logent_player_claims_throne_1" value="24" />
+    <option name="logent_player_claims_throne_2" value="25" />
+    <option name="logent_troop_feels_cheated_by_troop_over_land" value="26" />
+    <option name="logent_ruler_intervenes_in_quarrel" value="27" />
+    <option name="logent_lords_quarrel_over_land" value="28" />
+    <option name="logent_lords_quarrel_over_insult" value="29" />
+    <option name="logent_marshal_vs_lord_quarrel" value="30" />
+    <option name="logent_lords_quarrel_over_woman" value="31" />
+    <option name="logent_lord_protests_marshall_appointment" value="32" />
+    <option name="logent_lord_blames_defeat" value="33" />
+    <option name="logent_player_suggestion_succeeded" value="35" />
+    <option name="logent_player_suggestion_failed" value="36" />
+    <option name="logent_liege_promises_fief_to_vassal" value="37" />
+    <option name="logent_lord_insults_lord_for_cowardice" value="38" />
+    <option name="logent_lord_insults_lord_for_rashness" value="39" />
+    <option name="logent_lord_insults_lord_for_abandonment" value="40" />
+    <option name="logent_lord_insults_lord_for_indecision" value="41" />
+    <option name="logent_lord_insults_lord_for_cruelty" value="42" />
+    <option name="logent_lord_insults_lord_for_dishonor" value="43" />
+    <option name="logent_game_start" value="45" />
+    <option name="logent_poem_composed" value="46" />
+    <option name="logent_tournament_distinguished" value="47" />
+    <option name="logent_tournament_won" value="48" />
+    <option name="logent_lady_favors_suitor" value="51" />
+    <option name="logent_lady_betrothed_to_suitor_by_choice" value="52" />
+    <option name="logent_lady_betrothed_to_suitor_by_family" value="53" />
+    <option name="logent_lady_rejects_suitor" value="54" />
+    <option name="logent_lady_father_rejects_suitor" value="55" />
+    <option name="logent_lady_marries_lord" value="56" />
+    <option name="logent_lady_elopes_with_lord" value="57" />
+    <option name="logent_lady_rejected_by_suitor" value="58" />
+    <option name="logent_lady_betrothed_to_suitor_by_pressure" value="59" />
+    <option name="logent_lady_and_suitor_break_engagement" value="60" />
+    <option name="logent_lady_marries_suitor" value="61" />
+    <option name="logent_lord_holds_lady_hostages" value="62" />
+    <option name="logent_challenger_defeats_lord_in_duel" value="63" />
+    <option name="logent_challenger_loses_to_lord_in_duel" value="64" />
+    <option name="logent_player_stole_cattles_from_village" value="66" />
+    <option name="logent_party_spots_wanted_bandits" value="70" />
+    <option name="logent_border_incident_cattle_stolen" value="72" />
+    <option name="logent_border_incident_bride_abducted" value="73" />
+    <option name="logent_border_incident_villagers_killed" value="74" />
+    <option name="logent_border_incident_subjects_mistreated" value="75" />
+    <option name="logent_border_incident_troop_attacks_neutral" value="76" />
+    <option name="logent_border_incident_troop_breaks_truce" value="77" />
+    <option name="logent_border_incident_troop_suborns_lord" value="78" />
+    <option name="logent_policy_ruler_attacks_without_provocation" value="80" />
+    <option name="logent_policy_ruler_ignores_provocation" value="81" />
+    <option name="logent_policy_ruler_makes_peace_too_soon" value="82" />
+    <option name="logent_policy_ruler_declares_war_with_justification" value="83" />
+    <option name="logent_policy_ruler_breaks_truce" value="84" />
+    <option name="logent_policy_ruler_issues_indictment_just" value="85" />
+    <option name="logent_policy_ruler_issues_indictment_questionable" value="86" />
+    <option name="logent_player_faction_declares_war" value="90" />
+    <option name="logent_faction_declares_war_out_of_personal_enmity" value="91" />
+    <option name="logent_faction_declares_war_to_regain_territory" value="92" />
+    <option name="logent_faction_declares_war_to_curb_power" value="93" />
+    <option name="logent_faction_declares_war_to_respond_to_provocation" value="94" />
+    <option name="logent_war_declaration_types_end" value="95" />
+  </enum>
+
+  <enum name="tms">
+    <option name="tms_no_problem" value="0" />
+    <option name="tms_acknowledged" value="1" />
+    <option name="tms_dismissed" value="2" />
+  </enum>
+
+  <enum name="tmt">
+    <option name="tmt_aristocratic" value="1" />
+    <option name="tmt_egalitarian" value="2" />
+    <option name="tmt_humanitarian" value="3" />
+    <option name="tmt_honest" value="4" />
+    <option name="tmt_pious" value="5" />
+  </enum>
+
+  <enum name="pclash">
+    <option name="pclash_penalty_to_self" value="1" />
+    <option name="pclash_penalty_to_other" value="2" />
+    <option name="pclash_penalty_to_both" value="3" />
+  </enum>
+
+  <enum name="pp_history">
+    <option name="pp_history_scattered" value="1" />
+    <option name="pp_history_dismissed" value="2" />
+    <option name="pp_history_quit" value="3" />
+    <option name="pp_history_indeterminate" value="4" />
+  </enum>
+
+  <enum name="npc_mission">
+    <option name="npc_mission_kingsupport" value="1" />
+    <option name="npc_mission_gather_intel" value="2" />
+    <option name="npc_mission_peace_request" value="3" />
+    <option name="npc_mission_pledge_vassal" value="4" />
+    <option name="npc_mission_seek_recognition" value="5" />
+    <option name="npc_mission_test_waters" value="6" />
+    <option name="npc_mission_non_aggression" value="7" />
+    <option name="npc_mission_rejoin_when_possible" value="8" />
+  </enum>
+
+  <enum name="mp">
+    <option name="mp_unaware" value="0" />
+    <option name="mp_stay_out" value="1" />
+    <option name="mp_prison_break_fight" value="2" />
+    <option name="mp_prison_break_stand_back" value="3" />
+    <option name="mp_prison_break_escaped" value="4" />
+    <option name="mp_prison_break_caught" value="5" />
+  </enum>
+
+  <enum name="tro">
+    <option name="tro_failed_to_join_army" value="1" />
+    <option name="tro_failed_to_support_colleague" value="2" />
+  </enum>
+
+  <enum name="cb">
+    <option name="cb_noble" value="1" />
+    <option name="cb_merchant" value="2" />
+    <option name="cb_guard" value="3" />
+    <option name="cb_forester" value="4" />
+    <option name="cb_nomad" value="5" />
+    <option name="cb_thief" value="6" />
+    <option name="cb_priest" value="7" />
+  </enum>
+
+  <enum name="cb2">
+    <option name="cb2_page" value="0" />
+    <option name="cb2_apprentice" value="1" />
+    <option name="cb2_urchin" value="2" />
+    <option name="cb2_steppe_child" value="3" />
+    <option name="cb2_merchants_helper" value="4" />
+  </enum>
+
+  <enum name="cb3">
+    <option name="cb3_poacher" value="3" />
+    <option name="cb3_craftsman" value="4" />
+    <option name="cb3_peddler" value="5" />
+    <option name="cb3_troubadour" value="7" />
+    <option name="cb3_squire" value="8" />
+    <option name="cb3_lady_in_waiting" value="9" />
+    <option name="cb3_student" value="10" />
+  </enum>
+
+  <enum name="cb4">
+    <option name="cb4_revenge" value="1" />
+    <option name="cb4_loss" value="2" />
+    <option name="cb4_wanderlust" value="3" />
+    <option name="cb4_disown" value="5" />
+    <option name="cb4_greed" value="6" />
+  </enum>
+
+  <enum name="enctype">
+    <option name="enctype_fighting_against_village_raid" value="1" />
+    <option name="enctype_catched_during_village_raid" value="2" />
+  </enum>
+
+  <enum name="slto">
+    <option name="slto_inactive" value="0" />
+    <option name="slto_kingdom_hero" value="2" />
+    <option name="slto_player_companion" value="5" />
+    <option name="slto_kingdom_lady" value="6" />
+    <option name="slto_kingdom_seneschal" value="7" />
+    <option name="slto_robber_knight" value="8" />
+    <option name="slto_inactive_pretender" value="9" />
+    <option name="stl_unassigned" value="-1" />
+    <option name="stl_reserved_for_player" value="-2" />
+    <option name="stl_rejected_by_player" value="-3" />
+    <option name="slto_retirement" value="11" />
+  </enum>
+
+  <enum name="rel">
+    <option name="rel_enemy" value="0" />
+    <option name="rel_neutral" value="1" />
+    <option name="rel_ally" value="2" />
+  </enum>
+
+  <enum name="tc">
+    <option name="tc_town_talk" value="0" />
+    <option name="tc_court_talk" value="1" />
+    <option name="tc_party_encounter" value="2" />
+    <option name="tc_castle_gate" value="3" />
+    <option name="tc_siege_commander" value="4" />
+    <option name="tc_join_battle_ally" value="5" />
+    <option name="tc_join_battle_enemy" value="6" />
+    <option name="tc_castle_commander" value="7" />
+    <option name="tc_hero_freed" value="8" />
+    <option name="tc_hero_defeated" value="9" />
+    <option name="tc_entering_center_quest_talk" value="10" />
+    <option name="tc_back_alley" value="11" />
+    <option name="tc_siege_won_seneschal" value="12" />
+    <option name="tc_ally_thanks" value="13" />
+    <option name="tc_tavern_talk" value="14" />
+    <option name="tc_rebel_thanks" value="15" />
+    <option name="tc_garden" value="16" />
+    <option name="tc_courtship" value="16" />
+    <option name="tc_after_duel" value="17" />
+    <option name="tc_prison_break" value="18" />
+    <option name="tc_escape" value="19" />
+    <option name="tc_give_center_to_fief" value="20" />
+    <option name="tc_merchants_house" value="21" />
+  </enum>
+
+  <enum name="courtship_poem">
+    <option name="courtship_poem_tragic" value="1" />
+    <option name="courtship_poem_heroic" value="2" />
+    <option name="courtship_poem_comic" value="3" />
+    <option name="courtship_poem_mystic" value="4" />
+    <option name="courtship_poem_allegoric" value="5" />
+  </enum>
+
+  <enum name="walkert">
+    <option name="walkert_default" value="0" />
+    <option name="walkert_needs_money" value="1" />
+    <option name="walkert_needs_money_helped" value="2" />
+    <option name="walkert_spy" value="3" />
+  </enum>
+
+  <enum name="btactic">
+    <option name="btactic_hold" value="1" />
+    <option name="btactic_follow_leader" value="2" />
+    <option name="btactic_charge" value="3" />
+    <option name="btactic_stand_ground" value="4" />
+  </enum>
+
+  <enum name="tcm">
+    <option name="tcm_default" value="0" />
+    <option name="tcm_disguised" value="1" />
+    <option name="tcm_prison_break" value="2" />
+    <option name="tcm_escape" value="3" />
+  </enum>
+
+  <enum name="abm">
+    <option name="abm_training" value="1" />
+    <option name="abm_visit" value="2" />
+    <option name="abm_tournament" value="3" />
+  </enum>
+
+  <enum name="ctm">
+    <option name="ctm_melee" value="1" />
+    <option name="ctm_ranged" value="2" />
+    <option name="ctm_mounted" value="3" />
+    <option name="ctm_training" value="4" />
+  </enum>
+
+  <enum name="vba">
+    <option name="vba_normal" value="1" />
+    <option name="vba_after_training" value="2" />
+  </enum>
+
+  <enum name="somt">
+    <option name="somt_object" value="1" />
+    <option name="somt_entry" value="2" />
+    <option name="somt_item" value="3" />
+    <option name="somt_baggage" value="4" />
+    <option name="somt_flora" value="5" />
+    <option name="somt_passage" value="6" />
+    <option name="somt_spawned_item" value="7" />
+    <option name="somt_spawned_single_ammo_item" value="8" />
+    <option name="somt_spawned_unsheathed_item" value="9" />
+    <option name="somt_shield" value="10" />
+    <option name="somt_temporary_object" value="11" />
+  </enum>
+
+  <enum name="tcs">
+    <option name="tcs_admiration" value="2" />
+    <option name="tcs_marriage" value="3" />
+    <option name="tcs_dump" value="4" />
+  </enum>
+  
+  <enum name="tct">
+    <option name="tct_noble" value="1" />
+    <option name="tct_common" value="2" />
+  </enum>
+
+  <enum name="cci">
+    <!-- These correspond to slot_center_has_manor .. slot_center_has_prisoner_tower -->
+    <option value="130" name="cci_manor" />
+    <option value="131" name="cci_fish_pond" />
+    <option value="132" name="cci_watch_tower" />
+    <option value="133" name="cci_school" />
+    <option value="134" name="cci_messenger_post" />
+    <option value="135" name="cci_prisoner_tower" />
+  </enum>
+</module>

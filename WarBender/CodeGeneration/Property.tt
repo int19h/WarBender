@@ -1,0 +1,13 @@
+﻿<#
+Dim propTypeName = CSharpTypeName(prop.TypeName)
+Dim fieldName = "_field__" & prop.Name
+#>
+
+<#= propTypeName #> <#= fieldName #>;
+
+<#= prop.Visibility #> override <#= propTypeName #> <#= prop.Name #> {
+    get => <#= fieldName #>;
+    set {
+        SetProperty("<#= prop.Name #>", ref <#= fieldName #>, value);
+    }
+}

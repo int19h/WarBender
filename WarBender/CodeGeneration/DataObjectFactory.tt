@@ -1,0 +1,4 @@
+﻿partial class DataObjectFactory : IDataObjectFactory<<#= typeName #>> {
+    [GeneratedCode("", "")]
+    <#= typeName #> IDataObjectFactory<<#= typeName #>>.Create() => <#= typeName #>.Create();
+}

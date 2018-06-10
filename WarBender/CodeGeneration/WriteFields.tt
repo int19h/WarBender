@@ -1,0 +1,36 @@
+﻿protected override void WriteFields(BinaryWriter writer) {
+    var game = this.Game();
+    var bitFieldWriter = new BitFieldWriter();
+    <#
+    afterBitField = False
+    For Each prop in props
+        #> 
+        if (<#= prop.Condition #>) {
+            <#
+            If prop.IsDataObject Then
+                #> 
+                this.<#= prop.Name #>.WriteTo(writer);
+                <#
+            Else
+                If prop.BitField IsNot Nothing Then
+                    If Not afterBitField Then
+                        #>
+                        bitFieldWriter.Start(writer);
+                        <#
+                    End If
+                    #>
+                    bitFieldWriter.WriteField(<#= prop.BitField #>, (ulong)this.<#= prop.Name #>);
+                    <#
+                    afterBitField = True
+                Else
+                    #> 
+                    <#= SerializerFor(prop) #>.Write(writer, this.<#= prop.Name #>);
+                    <#
+                End If
+            End If
+            #> 
+        }
+        <#
+    Next
+    #> 
+}
