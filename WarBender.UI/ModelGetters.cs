@@ -113,7 +113,7 @@ namespace WarBender.UI {
                     //}
                     return children;
                 default:
-                    throw new ArgumentException($"Cannot retrieve children for {obj}", nameof(obj));
+                    return null;
             }
         }
     }
