@@ -52,6 +52,7 @@
             // propertyGrid
             // 
             this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid.HelpVisible = false;
             this.propertyGrid.Location = new System.Drawing.Point(0, 25);
             this.propertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.propertyGrid.Name = "propertyGrid";

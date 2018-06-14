@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.IO;
 using WarBender.CodeGeneration;
-using WarBender.Modules;
 
 namespace WarBender {
     public interface IRecord : IDataObject, INotifyPropertyChanged {
