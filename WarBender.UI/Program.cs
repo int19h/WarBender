@@ -8,11 +8,11 @@ namespace WarBender.UI {
     public static class Program {
         [STAThread]
         public static void Main() {
-            if (Settings.Default.DebugConsole && !Debugger.IsAttached) {
-                NativeMethods.AllocConsole();
-                Console.OpenStandardOutput();
-                Trace.Listeners.Add(new ConsoleTraceListener());
-            }
+            //if (Settings.Default.DebugConsole && !Debugger.IsAttached) {
+            //    NativeMethods.AllocConsole();
+            //    Console.OpenStandardOutput();
+            //    Trace.Listeners.Add(new ConsoleTraceListener());
+            //}
 
             Trace.WriteLine($"WarBender v{typeof(Program).Assembly.GetName().Version}", nameof(Program));
 

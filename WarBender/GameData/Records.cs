@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Drawing;
+using System.Drawing.Design;
 using System.Linq;
 using WarBender.Modules;
 
@@ -509,7 +511,10 @@ namespace WarBender.GameData {
         public abstract int current_mission_template_id { get; set; }
         public abstract int party_creation_min_random_value { get; set; }
         public abstract int party_creation_max_random_value { get; set; }
-        public abstract string game_log { get; set; } // TODO: multiline?
+
+        [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+        public abstract string game_log { get; set; }
+
         private FixedLengthCollection<int> _4 { get; } = 6;
         private long _5 { get; set; }
         public abstract float rest_period { get; set; }

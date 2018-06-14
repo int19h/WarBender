@@ -30,6 +30,8 @@ namespace WarBender.UI {
             InitializeComponent();
             _initialText = Text;
 
+            Trace.Listeners.Add(new TextBoxTraceListener(richTextBoxLog));
+
             SendMessage(textBoxSearch.Handle, EM_SETCUEBANNER, 0, "Search (Ctrl+,)");
 
             openFileDialog.InitialDirectory = saveFileDialog.InitialDirectory = Path.Combine(
@@ -446,6 +448,17 @@ namespace WarBender.UI {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
+            //var console = GetConsoleWindow();
+            //if (console != IntPtr.Zero) {
+            //    var mdiClient = Controls.OfType<MdiClient>().Single();
+            //    SetParent(console, mdiClient.Handle);
+            //    SetWindowLong(console, GWL_STYLE, WS_CHILD | WS_MAXIMIZE | WS_HSCROLL | WS_VSCROLL | WS_VISIBLE);
+            //    showConsoleToolStripMenuItem.Visible = true;
+            //    mdiClient.Resize += delegate {
+            //        SetWindowPos(console, IntPtr.Zero, 0, 0, mdiClient.ClientRectangle.Width, mdiClient.ClientRectangle.Height, 0);
+            //    };
+            //}
+
             var args = Environment.GetCommandLineArgs();
             if (args.Length == 2) {
                 OpenAsync(args[1]).GetAwaiter();
@@ -535,6 +548,12 @@ namespace WarBender.UI {
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e) {
             new SettingsForm().ShowDialog(this);
+        }
+
+        private void showConsoleToolStripMenuItem_Click(object sender, EventArgs e) {
+            foreach (var mdiChild in MdiChildren) {
+                mdiChild.WindowState = FormWindowState.Minimized;
+            }
         }
     }
 }

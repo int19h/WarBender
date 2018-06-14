@@ -92,6 +92,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextBoxTraceListener.cs" />
     <Compile Include="ModelGetters.cs" />
     <Compile Include="FriendlyNames.cs" />
     <Compile Include="SettingsForm.cs">

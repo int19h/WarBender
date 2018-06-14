@@ -34,6 +34,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +56,8 @@
             this.openContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.openFileDialogModule = new System.Windows.Forms.OpenFileDialog();
+            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
+            this.splitterLog = new System.Windows.Forms.Splitter();
             menuStrip = new System.Windows.Forms.MenuStrip();
             mdiTabStrip = new WarBender.UI.MdiTabStrip();
             splitter = new System.Windows.Forms.Splitter();
@@ -120,6 +123,7 @@
             // windowToolStripMenuItem
             // 
             this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showConsoleToolStripMenuItem,
             this.newWindowToolStripMenuItem,
             this.cascadeToolStripMenuItem,
             this.tileHorizontalToolStripMenuItem,
@@ -129,6 +133,14 @@
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
             this.windowToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.windowToolStripMenuItem.Text = "&Window";
+            // 
+            // showConsoleToolStripMenuItem
+            // 
+            this.showConsoleToolStripMenuItem.Name = "showConsoleToolStripMenuItem";
+            this.showConsoleToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.showConsoleToolStripMenuItem.Text = "Show C&onsole";
+            this.showConsoleToolStripMenuItem.Visible = false;
+            this.showConsoleToolStripMenuItem.Click += new System.EventHandler(this.showConsoleToolStripMenuItem_Click);
             // 
             // newWindowToolStripMenuItem
             // 
@@ -310,11 +322,37 @@
             this.openFileDialogModule.Filter = "Mount & Blade modules (module.ini)|module.ini";
             this.openFileDialogModule.Title = "Specify module.ini to use for this saved game";
             // 
+            // richTextBoxLog
+            // 
+            this.richTextBoxLog.BackColor = System.Drawing.SystemColors.WindowText;
+            this.richTextBoxLog.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::WarBender.UI.Properties.Settings.Default, "DebugConsole", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.richTextBoxLog.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBoxLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxLog.ForeColor = System.Drawing.SystemColors.Window;
+            this.richTextBoxLog.Location = new System.Drawing.Point(242, 244);
+            this.richTextBoxLog.Name = "richTextBoxLog";
+            this.richTextBoxLog.ReadOnly = true;
+            this.richTextBoxLog.Size = new System.Drawing.Size(336, 158);
+            this.richTextBoxLog.TabIndex = 9;
+            this.richTextBoxLog.Text = "";
+            this.richTextBoxLog.Visible = global::WarBender.UI.Properties.Settings.Default.DebugConsole;
+            // 
+            // splitterLog
+            // 
+            this.splitterLog.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.splitterLog.Location = new System.Drawing.Point(242, 241);
+            this.splitterLog.Name = "splitterLog";
+            this.splitterLog.Size = new System.Drawing.Size(336, 3);
+            this.splitterLog.TabIndex = 11;
+            this.splitterLog.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 402);
+            this.Controls.Add(this.splitterLog);
+            this.Controls.Add(this.richTextBoxLog);
             this.Controls.Add(splitter);
             this.Controls.Add(this.panel);
             this.Controls.Add(mdiTabStrip);
@@ -368,6 +406,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialogModule;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showConsoleToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox richTextBoxLog;
+        private System.Windows.Forms.Splitter splitterLog;
     }
 }
 
