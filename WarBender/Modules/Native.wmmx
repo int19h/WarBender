@@ -9,7 +9,6 @@
     <group name="$trp_npcs" range="194 209"/>
     <group name="$trp_kingdom_lords" range="210 215"/>
     <group name="$trp_knights" range="216 335"/>
-    <group name="$trp_knights_1" range="216 235"/>
     <group name="$trp_kingdom_pretenders" range="336 341"/>
     <group name="$trp_kingdom_ladies" range="342 462"/>
     <group name="$trp_town_seneschals" range="464 485"/>
@@ -58,12 +57,14 @@
     <slot index="030" name="faction_player_alarm" />
     <slot index="031" name="faction_last_mercenary_offer_time" />
     <slot index="032" name="faction_recognized_player" type="bool" />
-    <!--<slot index="041" name="faction_quick_battle_tier_1_infantry" />
-    <slot index="042" name="faction_quick_battle_tier_2_infantry" />
-    <slot index="043" name="faction_quick_battle_tier_1_archer" />
-    <slot index="044" name="faction_quick_battle_tier_2_archer" />
-    <slot index="045" name="faction_quick_battle_tier_1_cavalry" />
-    <slot index="046" name="faction_quick_battle_tier_2_cavalry" />-->
+    <!--
+            <slot index="041" name="faction_quick_battle_tier_1_infantry" />
+            <slot index="042" name="faction_quick_battle_tier_2_infantry" />
+            <slot index="043" name="faction_quick_battle_tier_1_archer" />
+            <slot index="044" name="faction_quick_battle_tier_2_archer" />
+            <slot index="045" name="faction_quick_battle_tier_1_cavalry" />
+            <slot index="046" name="faction_quick_battle_tier_2_cavalry" />
+    -->
     <slot index="041" name="faction_tier_1_troop" type="troop" />
     <slot index="042" name="faction_tier_2_troop" type="troop" />
     <slot index="043" name="faction_tier_3_troop" type="troop" />
