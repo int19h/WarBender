@@ -1,5 +1,18 @@
 ﻿#!/usr/bin/env python
 
+# Copy this script into the directory with your module system, and run it like so:
+#
+#   py -2 pt2wmmx.py module_constants.py >output.xml
+#
+# It will look at all variables defined in module_constants.py, and for each one
+# of them, generate either a <slot> definition or an <option> definition for use
+# in a .wmmx file. If the name of the variable starts with "slot_", then it will
+# be a slot definition; otherwise, it's an option. 
+#
+# Since the script doesn't know which object or objects the slots belong to, or
+# which <enum> or <flags> the options belong to, you will need to copy/paste the
+# produced definitions into your .wmmx into the appropriate places.
+
 from __future__ import print_function
 from os import path
 import sys
