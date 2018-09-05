@@ -67,9 +67,15 @@ namespace WarBender.UI {
 
         private string WarbandPath {
             get {
-                var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
-                var warbandKey = hklm.OpenSubKey(@"SOFTWARE\mount&blade warband");
-                return warbandKey.GetValue("install_path", null)?.ToString();
+                try {
+                    var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
+                    var warbandKey = hklm?.OpenSubKey(@"SOFTWARE\mount&blade warband");
+                    return warbandKey?.GetValue("install_path", null)?.ToString();
+                } catch (UnauthorizedAccessException) {
+                    return null;
+                } catch (IOException) {
+                    return null;
+                }
             }
         }
 
