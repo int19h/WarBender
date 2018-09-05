@@ -2364,7 +2364,7 @@ namespace WarBender.GameData
             {
                 var game = this.Game();
                 var bitFieldReader = new BitFieldReader();
-                if (true)
+                if (true && this.IsPresent())
                 {
                     this.experience = ValueSerializers._float.Read(reader);
                 }
@@ -2373,7 +2373,7 @@ namespace WarBender.GameData
                     this.experience = default;
                 }
 
-                if (true)
+                if (true && this.IsPresent())
                 {
                     this.num_upgradeable = ValueSerializers._int.Read(reader);
                 }
@@ -2396,12 +2396,12 @@ namespace WarBender.GameData
             {
                 var game = this.Game();
                 var bitFieldWriter = new BitFieldWriter();
-                if (true)
+                if (true && this.IsPresent())
                 {
                     ValueSerializers._float.Write(writer, this.experience);
                 }
 
-                if (true)
+                if (true && this.IsPresent())
                 {
                     ValueSerializers._int.Write(writer, this.num_upgradeable);
                 }
@@ -6926,7 +6926,7 @@ namespace WarBender
         partial class RecordTypes
         {
             [GeneratedCode("", "")]
-            static partial void GetGeneratedCodeHash(ref int hash) => hash = 1308231791;
+            static partial void GetGeneratedCodeHash(ref int hash) => hash = -2023478801;
         }
     }
 }

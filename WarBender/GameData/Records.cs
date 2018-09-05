@@ -198,10 +198,15 @@ namespace WarBender.GameData {
     }
 
     public abstract partial class PlayerPartyTroopStack : Record<PlayerPartyTroopStack> {
+        private bool IsPresent() => this.Game().Data.parties[0].stacks[Index].has_player_party_info();
+
+        [ConditionalOn(nameof(IsPresent))]
         public abstract float experience { get; set; }
+
+        [ConditionalOn(nameof(IsPresent))]
         public abstract int num_upgradeable { get; set; }
 
-        private bool has_troop_dnas() => Index < 32;
+        private bool has_troop_dnas() => IsPresent() && Index < 32;
 
         [ConditionalOn(nameof(has_troop_dnas))]
         public FixedLengthCollection<int> troop_dnas { get; } = 32;
@@ -545,10 +550,7 @@ namespace WarBender.GameData {
         public abstract int player_own_troop_wounded_count { get; set; }
 
         public SavedGame() {
-            player_party_troop_stacks = new ComputedLengthCollection<PlayerPartyTroopStack>(game => {
-                var len = parties[0].stacks.Where(stack => stack.has_player_party_info()).Count();
-                return len;
-            });
+            player_party_troop_stacks = new ComputedLengthCollection<PlayerPartyTroopStack>(_ => parties[0].stacks.Count);
         }
 
         private Game _game;

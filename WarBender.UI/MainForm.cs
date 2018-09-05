@@ -105,11 +105,18 @@ namespace WarBender.UI {
                 }
 
                 Shell32.ShellLinkObject link = null;
-                {
-                    var shell = new Shell32.Shell();
+                try {
+                    // Can't instantiate Shell32.Shell directly, because it will require IShellDispatch6
+                    // if the app is built on Win8+, and then it'll fail at runtime on Win7. On the other
+                    // hand, IShellDispatch5 is available on Win7.
+                    var shellType = Type.GetTypeFromProgID("Shell.Application");
+                    var shell = (Shell32.IShellDispatch5)Activator.CreateInstance(shellType);
                     var folder = shell.NameSpace(savesPath);
                     var folderItem = folder?.ParseName(ModuleLinkFileName);
                     link = folderItem?.IsLink == true ? folderItem.GetLink : null;
+                } catch (Exception ex) {
+                    // Shell APIs are brittle - if anything here fails, just ignore the link.
+                    Trace.WriteLine(ex, nameof(MainForm));
                 }
 
                 string moduleName = null;
