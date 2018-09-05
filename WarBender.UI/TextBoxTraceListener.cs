@@ -11,6 +11,7 @@ namespace WarBender.UI {
         }
 
         public override void Write(string message) {
+            message = message.Replace("\r\n", "\n");
             message = message.Replace("\n", "\r\n");
             _textBox.BeginInvoke((Action)delegate {
                 _textBox.AppendText(message);

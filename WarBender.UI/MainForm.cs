@@ -58,7 +58,7 @@ namespace WarBender.UI {
         internal GameDesignerHost DesignerHost { get; private set; }
 
         public Game Game {
-            get => DesignerHost.Game;
+            get => DesignerHost?.Game;
             set {
                 DesignerHost = value == null ? null : new GameDesignerHost(value);
                 _modelGetters.Game = value;
