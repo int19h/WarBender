@@ -61,6 +61,7 @@
             this.treeListView.UseNotifyPropertyChanged = true;
             this.treeListView.View = System.Windows.Forms.View.Details;
             this.treeListView.VirtualMode = true;
+            this.treeListView.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.treeListView_CellToolTipShowing);
             this.treeListView.ItemActivate += new System.EventHandler(this.treeListView_ItemActivate);
             // 
             // treeListViewNameColumn

@@ -63,5 +63,10 @@ namespace WarBender.UI {
         private void treeListView_ItemActivate(object sender, EventArgs e) {
             SelectObject?.Invoke(this, EventArgs.Empty);
         }
+
+        private void treeListView_CellToolTipShowing(object sender, ToolTipShowingEventArgs e) {
+            e.Text = _modelGetters.GetToolTip(e.Model);
+            e.Handled = true;
+        }
     }
 }

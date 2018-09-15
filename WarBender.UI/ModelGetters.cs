@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Windows.Forms;
 using WarBender.GameData;
 using WarBender.Modules;
 
 namespace WarBender.UI {
     internal class ModelGetters {
+        private static readonly ImageList _modelImageList = new SharedImageLists().ModelImageList;
+
         public Game Game { get; set; }
 
         public bool CanExpand(object obj) =>
@@ -82,7 +84,11 @@ namespace WarBender.UI {
                 case ICollection collection:
                     return collection.ItemType.Name + "Folder";
                 case IRecord record:
-                    return record.Type.Name;
+                    if (_modelImageList.Images.ContainsKey(record.Type.Name)) {
+                        return record.Type.Name;
+                    } else {
+                        return "Record";
+                    }
                 default:
                     return null;
             }
