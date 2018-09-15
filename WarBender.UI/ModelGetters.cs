@@ -90,7 +90,7 @@ namespace WarBender.UI {
                         return "Record";
                     }
                 default:
-                    return null;
+                    return "Value";
             }
         }
 
