@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -17,7 +19,6 @@ namespace WarBender.UI {
     public partial class MainForm : FormBase {
         public static MainForm Instance;
 
-        public Module module;
         private string _initialText;
         private readonly ModelGetters _modelGetters = new ModelGetters();
 
@@ -57,10 +58,27 @@ namespace WarBender.UI {
 
         internal GameDesignerHost DesignerHost { get; private set; }
 
+        public string FileName { get; private set; }
+
+        public bool IsDirty { get; private set; }
+
         public Game Game {
             get => DesignerHost?.Game;
             set {
+                if (DesignerHost != null) {
+                    DesignerHost.ComponentAdded -= DesignerHost_ComponentAdded;
+                    DesignerHost.ComponentChanged -= DesignerHost_ComponentChanged;
+                    DesignerHost.ComponentRemoved -= DesignerHost_ComponentRemoved;
+                }
+
                 DesignerHost = value == null ? null : new GameDesignerHost(value);
+
+                if (DesignerHost != null) {
+                    DesignerHost.ComponentAdded += DesignerHost_ComponentAdded;
+                    DesignerHost.ComponentChanged += DesignerHost_ComponentChanged;
+                    DesignerHost.ComponentRemoved += DesignerHost_ComponentRemoved;
+                }
+
                 _modelGetters.Game = value;
             }
         }
@@ -250,6 +268,10 @@ namespace WarBender.UI {
         }
 
         public async Task OpenAsync(string fileName) {
+            if (!ConfirmDiscardingChanges()) {
+                return;
+            }
+
             UpdateFileDialogs(fileName);
             UseWaitCursor = true;
             openToolStripMenuItem.Enabled = false;
@@ -266,6 +288,7 @@ namespace WarBender.UI {
                     mdiChild.Close();
                 }
                 Game = null;
+                IsDirty = false;
                 Text = _initialText;
 
                 Game game = null;
@@ -295,6 +318,7 @@ namespace WarBender.UI {
                 treeListView.Expand(Game.Data);
                 ShowPropertyGrid(treeListView.Objects);
 
+                FileName = fileName;
                 Text = Path.GetFileName(fileName) + " - " + _initialText;
 
                 if (roundtripError != null) {
@@ -394,6 +418,8 @@ namespace WarBender.UI {
                     }
                 }
 
+                IsDirty = false;
+                FileName = fileName;
                 Text = Path.GetFileName(fileName) + " - " + _initialText;
 
                 sw.Stop();
@@ -451,6 +477,23 @@ namespace WarBender.UI {
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void ProcessComponentChange(object component) {
+            if (component is IDataObjectChild) {
+                IsDirty = true;
+            }
+        }
+
+        private bool ConfirmDiscardingChanges() {
+            if (!IsDirty) {
+                return true;
+            }
+            var dr = MessageBox.Show(this,
+                "You have unsaved changes. If you continue with this operation, " +
+                "they will be lost. Are you sure you want to proceed?",
+                null, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            return dr == DialogResult.Yes;
         }
 
         private void menuStrip_ItemAdded(object sender, ToolStripItemEventArgs e) {
@@ -568,6 +611,24 @@ namespace WarBender.UI {
         private void showConsoleToolStripMenuItem_Click(object sender, EventArgs e) {
             foreach (var mdiChild in MdiChildren) {
                 mdiChild.WindowState = FormWindowState.Minimized;
+            }
+        }
+
+        private void DesignerHost_ComponentRemoved(object sender, ComponentEventArgs e) {
+            ProcessComponentChange(e.Component);
+        }
+
+        private void DesignerHost_ComponentChanged(object sender, ComponentChangedEventArgs e) {
+            ProcessComponentChange(e.Component);
+        }
+
+        private void DesignerHost_ComponentAdded(object sender, ComponentEventArgs e) {
+            ProcessComponentChange(e.Component);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            if (!ConfirmDiscardingChanges()) {
+                e.Cancel = true;
             }
         }
     }

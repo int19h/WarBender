@@ -366,6 +366,7 @@
             this.Name = "MainForm";
             this.Text = "WarBender";
             this.WindowRestoreState = global::WarBender.UI.Properties.Settings.Default.WindowState;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
