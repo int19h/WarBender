@@ -73,6 +73,7 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Design\EntityReferenceEditor.cs" />
     <Compile Include="Design\EnumConverter.cs" />
     <Compile Include="Design\RecordEditor.cs" />
     <Compile Include="Design\FlagsEditor.cs" />
@@ -81,6 +82,12 @@
     <Compile Include="Design\EntityReferenceConverter.cs" />
     <Compile Include="Design\GameTypeDescriptionProvider.cs" />
     <Compile Include="Design\RecordConverter.cs" />
+    <Compile Include="EntityDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EntityDropDown.Designer.cs">
+      <DependentUpon>EntityDropDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +130,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntityDropDown.resx">
+      <DependentUpon>EntityDropDown.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

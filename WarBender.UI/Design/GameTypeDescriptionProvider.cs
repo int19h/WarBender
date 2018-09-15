@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Design;
 using System.Linq;
 using System.Reflection;
 using WarBender.Modules;
@@ -14,7 +15,7 @@ namespace WarBender.UI.Design {
         private static readonly Dictionary<Type, Func<Type, ICustomTypeDescriptor, ICustomTypeDescriptor>> _descriptors = new Dictionary<Type, Func<Type, ICustomTypeDescriptor, ICustomTypeDescriptor>>() {
             [typeof(IRecord)] = (t, otd) => new RecordDescriptor(t, otd),
             [typeof(ICollection)] = (t, otd) => new GameTypeDescriptor<ICollection, CollectionConverter>(otd),
-            [typeof(IEntityReference)] = (t, otd) => new GameTypeDescriptor<IEntityReference, EntityReferenceConverter>(otd),
+            [typeof(IEntityReference)] = (t, otd) => new EntityReferenceDescriptor(otd),
             [typeof(EntityDefinition)] = (t, otd) => new GameTypeDescriptor<EntityDefinition, EntityDefinitionConverter>(otd),
             [typeof(Enum)] = (t, otd) => new EnumDescriptor(t, otd),
         };
@@ -63,6 +64,18 @@ namespace WarBender.UI.Design {
         public override AttributeCollection GetAttributes() {
             var attrs = base.GetAttributes().Cast<Attribute>().ToList();
             attrs.Add(new TypeConverterAttribute(typeof(TConverter)));
+            return new AttributeCollection(attrs.ToArray());
+        }
+    }
+
+    internal class EntityReferenceDescriptor : GameTypeDescriptor<IEntityReference, EntityReferenceConverter> {
+        public EntityReferenceDescriptor(ICustomTypeDescriptor originalDescriptor)
+            : base(originalDescriptor) {
+        }
+
+        public override AttributeCollection GetAttributes() {
+            var attrs = base.GetAttributes().Cast<Attribute>().ToList();
+            attrs.Add(new EditorAttribute(typeof(EntityReferenceEditor), typeof(UITypeEditor)));
             return new AttributeCollection(attrs.ToArray());
         }
     }

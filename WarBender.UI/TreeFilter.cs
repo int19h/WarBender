@@ -16,7 +16,10 @@ namespace WarBender.UI {
             }
 
             foreach (var obj in objects) {
-                Populate(treeView, treeView.ChildrenGetter(obj), filter);
+                if (treeView.ChildrenGetter != null) {
+                    Populate(treeView, treeView.ChildrenGetter(obj), filter);
+                }
+
                 if (!filter.Filter(obj)) {
                     continue;
                 }
@@ -24,9 +27,7 @@ namespace WarBender.UI {
                 var matched = obj;
                 while (matched != null) {
                     _objects.Add(matched);
-                    if (matched is IDataObjectChild child) {
-                        matched = child.Parent;
-                    }
+                    matched = (matched as IDataObjectChild)?.Parent;
                 }
             }
         }
