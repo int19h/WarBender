@@ -28,24 +28,30 @@ namespace WarBender.UI {
                     //var ranges = groupDef.Ranges.Select(range => $"{range.LowerBound}..{range.UpperBound}");
                     //return $"{groupDef.Name} ({string.Join(", ", ranges)})";
                     return groupDef.Name;
-                case IHasName hasName:
-                    var name = hasName.Name;
-                    if (obj is Party party && party.IsPresent && string.IsNullOrEmpty(name)) {
-                        name = party.party_template_id.Entity.Name;
-                        if (name != null) {
-                            name = "<" + name + ">";
+                case IHasName hasName: {
+                        var name = hasName.Name;
+                        if (obj is Party party && party.IsPresent && string.IsNullOrEmpty(name)) {
+                            name = party.party_template_id.Entity.Name;
+                            if (name != null) {
+                                name = "<" + name + ">";
+                            }
                         }
-                    }
-                    if (string.IsNullOrEmpty(name)) {
-                        if (obj is IRecord record) {
-                            return record.Index;
+                        if (string.IsNullOrEmpty(name)) {
+                            if (obj is IRecord record) {
+                                return record.Index;
+                            }
                         }
+                        return name;
                     }
-                    return name;
                 case IHasId hasId:
                     return hasId.Id;
-                case IRecord record:
-                    return record.Index;
+                case IRecord record: {
+                        var name = record.Type.Name;
+                        if (record.Index >= 0) {
+                            name += " #" + record.Index;
+                        }
+                        return name;
+                    }
                 case ICollection coll:
                     return CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(FriendlyNames.Plural(coll.ItemType));
                 default:

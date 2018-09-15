@@ -70,7 +70,10 @@ namespace WarBender.UI {
                             Text = hasId.Id;
                             break;
                         case IRecord record:
-                            Text = record.Type.Name + " #" + record.Index;
+                            Text = record.Type.Name;
+                            if (record.Index >= 0) {
+                                Text += " #" + record.Index;
+                            }
                             break;
                         case ICollection coll:
                             Text = CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(FriendlyNames.Plural(coll.ItemType));
