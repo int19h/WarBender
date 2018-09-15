@@ -48,7 +48,13 @@ namespace WarBender.UI {
                 ResizeListView();
 
                 var images = _objects.Select(obj => _modelGetters.GetImage(obj)).Distinct().ToArray();
-                var image = sharedImageLists.ModelImageList.Images[images.Length == 1 ? images[0] : "Record"];
+                Image image = null;
+                if (images.Length == 1) {
+                    image = sharedImageLists.ModelImageList.Images[images[0]];
+                }
+                if (image == null) {
+                    image = sharedImageLists.ModelImageList.Images["Record"];
+                }
                 Icon = Icon.FromHandle(new Bitmap(image).GetHicon());
 
                 if (_objects.Length == 1) {
