@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
 namespace WarBender.UI.Design {
     internal class EntityReferenceConverter : ExpandableObjectConverter {
-        private Type GetEntityReferenceType(ITypeDescriptorContext context) {
+        private static Type GetEntityReferenceType(ITypeDescriptorContext context) {
             var erefType = context?.PropertyDescriptor?.PropertyType;
             if (erefType != null) {
                 if (erefType.IsGenericType && erefType.GetGenericTypeDefinition() == typeof(Nullable<>)) {
@@ -18,13 +19,17 @@ namespace WarBender.UI.Design {
             return null;
         }
 
+        private static Game GetGame(ITypeDescriptorContext context) =>
+            (context?.Instance as IDataObjectChild)?.TryGame() ??
+            ((context?.Instance as IEnumerable<object>)?.FirstOrDefault() as IDataObject)?.TryGame();
+
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
             destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
 
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
             if (destinationType == typeof(string) && value is IEntityReference eref) {
                 var s = eref.Index.ToString();
-                var game = eref.TryGame() ?? (context.Instance as IDataObjectChild)?.TryGame();
+                var game = eref.TryGame() ?? GetGame(context);
                 var entity = game?.Entities.GetEntity(eref);
                 if (entity != null) {
                     if (entity is IHasId hasId && !string.IsNullOrEmpty(hasId.Id)) {
@@ -55,9 +60,10 @@ namespace WarBender.UI.Design {
                     return Activator.CreateInstance(erefType, n);
                 }
 
-                if (context?.Instance is IDataObject obj) {
+                var game = GetGame(context);
+                if (game != null) {
                     var entityType = erefType.GenericTypeArguments[0];
-                    var entities = obj.Game().Entities.GetEntities(entityType).OfType<IHasId>();
+                    var entities = game.Entities.GetEntities(entityType).OfType<IHasId>();
                     var entity = entities.FirstOrDefault(ent => ent.Id == s);
                     if (entity == null) {
                         throw new IndexOutOfRangeException(
