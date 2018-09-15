@@ -68,5 +68,12 @@ namespace WarBender.UI {
             e.Text = _modelGetters.GetToolTip(e.Model);
             e.Handled = true;
         }
+
+        protected override bool ProcessDialogKey(Keys keyData) {
+            if (keyData == Keys.Escape) {
+                SelectedObject = null;
+            }
+            return base.ProcessDialogKey(keyData);
+        }
     }
 }
