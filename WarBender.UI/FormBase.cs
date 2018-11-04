@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WarBender.UI {
+namespace WarBender.UI
+{
     public class FormBase : Form, INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
 

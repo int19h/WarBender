@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
-namespace WarBender {
+namespace WarBender
+{
     public interface ICollection : IList, IDataObject, IDataObjectChild {
         Type ItemType { get; }
 

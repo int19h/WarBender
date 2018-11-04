@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 
-namespace WarBender {
+namespace WarBender
+{
     internal sealed class NullableSerializer<T> : IValueSerializer<T?> 
         where T : struct { 
 

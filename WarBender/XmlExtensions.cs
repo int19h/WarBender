@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace WarBender {
+namespace WarBender
+{
     internal static class XmlExtensions {
         public static Exception InvalidXml(this XObject obj, string message) {
             var baseUri = obj.Document?.BaseUri;
