@@ -273,7 +273,7 @@
   </slots>
 
   <slots of="party" id="$p_centers">
-    <slot index="007" name="town_lord" />
+    <slot index="007" name="town_lord" type="troop" />
     <slot index="009" name="town_claimed_by_player" type="bool" />
     <slot index="010" name="town_center" type="scene" />
     <slot index="011" name="town_castle" type="scene" />
