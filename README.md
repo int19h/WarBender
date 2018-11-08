@@ -1,8 +1,8 @@
 # WarBender: a Mount & Blade: Warband save game editor
 
-Requires .NET Framework 4.7.2 or higher - [download here](https://www.microsoft.com/net/download/dotnet-framework-runtime).
+Requires .NET Framework 4.6 or higher - [download here](https://www.microsoft.com/net/download/dotnet-framework-runtime).
 
-Supported operating systems are Windows 7 and Windows 10. Windows 8.x is *not supported* (due to .NET 4.7 requirement).
+Supported operating systems are Windows 7 and above.
 
 ![image](https://user-images.githubusercontent.com/1175142/41222663-6fc53c0c-6d1c-11e8-8633-881255787187.png)
 
