@@ -6926,7 +6926,7 @@ namespace WarBender
         partial class RecordTypes
         {
             [GeneratedCode("", "")]
-            static partial void GetGeneratedCodeHash(ref int hash) => hash = 798107442;
+            static partial void GetGeneratedCodeHash(ref int hash) => hash = 1805939702;
         }
     }
 }
