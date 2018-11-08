@@ -2,7 +2,7 @@
 
 # Copy this script into the directory with your module system, and run it like so:
 #
-#   py -2 pt2wmmx.py module_constants.py >output.xml
+#   py -2 py2wmmx.py module_constants.py >output.xml
 #
 # It will look at all variables defined in module_constants.py, and for each one
 # of them, generate either a <slot> definition or an <option> definition for use
@@ -19,7 +19,7 @@ import sys
 import numbers
 
 if len(sys.argv) != 2:
-    print('Usage:\n\tpy -2 py2wmmx <module.py>', file=sys.stderr)
+    print('Usage:\n\tpy -2 py2wmmx.py <module.py>', file=sys.stderr)
     sys.exit(1)
 
 filename = sys.argv[1]
