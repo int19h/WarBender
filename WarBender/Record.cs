@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Text;
 using WarBender.CodeGeneration;
 
 namespace WarBender {
@@ -27,6 +28,25 @@ namespace WarBender {
         [Browsable(false)]
         public abstract Type Type { get; }
 
+        private long? _sizeInBytes;
+
+        [Computed]
+        [ParenthesizePropertyName(true)]
+        public long SizeInBytes {
+            get {
+                if (_sizeInBytes == null) {
+                    using (var stream = new MemoryStream()) {
+                        using (var writer = new BinaryWriter(stream, Encoding.Default, true)) {
+                            WriteTo(writer);
+                        }
+                        stream.Flush();
+                        _sizeInBytes = stream.Length;
+                    }
+                }
+                return _sizeInBytes.Value;
+            }
+        }
+
         IDataObjectChild IDataObjectChild.WithParent(IDataObject parent, int index) {
             Parent = parent;
             Index = index;
@@ -34,6 +54,13 @@ namespace WarBender {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e) {
+            PropertyChanged?.Invoke(this, e);
+
+            _sizeInBytes = null;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SizeInBytes)));
+        }
 
         protected void SetProperty<TValue>(string name, ref TValue field, TValue value) {
             if (Equals(field, value)) {
@@ -45,7 +72,7 @@ namespace WarBender {
             }
             field = value;
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            OnPropertyChanged(new PropertyChangedEventArgs(name));
         }
 
         protected void SetProperty<TEntity>(string name, ref EntityReference<TEntity> field, EntityReference<TEntity> value)
@@ -56,14 +83,14 @@ namespace WarBender {
             }
 
             field = new EntityReference<TEntity>(this, value);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            OnPropertyChanged(new PropertyChangedEventArgs(name));
         }
 
         protected void SetProperty(string name, ref float field, float value) {
             // Takes care of preserving positive/negative zero, infinity and NaN.
             if (BitConverter.DoubleToInt64Bits(field) != BitConverter.DoubleToInt64Bits(value)) {
                 field = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+                OnPropertyChanged(new PropertyChangedEventArgs(name));
             }
         }
 

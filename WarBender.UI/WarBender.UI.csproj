@@ -74,6 +74,7 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Design\EntityReferenceDescriptor.cs" />
     <Compile Include="Design\EntityReferenceEditor.cs" />
     <Compile Include="Design\EnumConverter.cs" />
     <Compile Include="Design\RecordEditor.cs" />

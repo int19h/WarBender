@@ -13,6 +13,8 @@ namespace WarBender {
         void ReadFrom(BinaryReader reader);
 
         void WriteTo(BinaryWriter writer);
+
+        long SizeInBytes { get; }
     }
 
     public interface IRootDataObject : IDataObject {

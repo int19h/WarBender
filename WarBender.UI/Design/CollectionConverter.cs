@@ -33,8 +33,9 @@ namespace WarBender.UI.Design {
                 return name;
             }
 
-            var desc = coll.Cast<object>().Select((item, i) =>
-                new ItemPropertyDescriptor(value.GetType(), i, GetName(item, i), item.GetType()));
+            var desc = TypeDescriptor.GetProperties(value.GetType(), attributes).Cast<PropertyDescriptor>().ToList();
+            desc.AddRange(coll.Cast<object>().Select((item, i) =>
+                new ItemPropertyDescriptor(value.GetType(), i, GetName(item, i), item.GetType())));
             return new PropertyDescriptorCollection(desc.ToArray());
         }
 

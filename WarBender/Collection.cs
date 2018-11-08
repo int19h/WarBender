@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace WarBender
 {
@@ -33,9 +35,32 @@ namespace WarBender
             }
         }
 
+        [ParenthesizePropertyName(true)]
+        public new int Count => base.Count;
+
+        [Browsable(false)]
         public Type ItemType => typeof(T);
 
+        [Browsable(false)]
         public IDataObject Parent { get; private set; }
+
+        private long? _sizeInBytes;
+
+        [ParenthesizePropertyName(true)]
+        public long SizeInBytes {
+            get {
+                if (_sizeInBytes == null) {
+                    using (var stream = new MemoryStream()) {
+                        using (var writer = new BinaryWriter(stream, Encoding.Default, true)) {
+                            WriteTo(writer);
+                        }
+                        stream.Flush();
+                        _sizeInBytes = stream.Length;
+                    }
+                }
+                return _sizeInBytes.Value;
+            }
+        }
 
         IDataObjectChild IDataObjectChild.WithParent(IDataObject parent, int index) {
             SetParent(parent);
@@ -129,12 +154,18 @@ namespace WarBender
         }
 
         protected virtual void OnItemAdded(T item, int index) {
+            _sizeInBytes = null;
+            OnPropertyChanged(new PropertyChangedEventArgs(nameof(SizeInBytes)));
+
             if (item is IDataObjectChild child) {
                 child.WithParent(this, index);
             }
         }
 
         protected virtual void OnItemRemoved(T item) {
+            _sizeInBytes = null;
+            OnPropertyChanged(new PropertyChangedEventArgs(nameof(SizeInBytes)));
+
             if (item is IDataObjectChild child) {
                 child.WithParent(null);
             }
@@ -165,6 +196,7 @@ namespace WarBender
     }
 
     public class FixedLengthCollection<T> : Collection<T>, IList {
+        [Browsable(false)]
         public int Length { get; }
 
         public FixedLengthCollection(int length) {
@@ -184,6 +216,7 @@ namespace WarBender
     }
 
     public class LengthPrefixedCollection<T> : Collection<T> {
+        [Browsable(false)]
         public int Length { get; private set; }
 
         public override int GetLength() => Length;
@@ -196,6 +229,7 @@ namespace WarBender
     }
 
     public class DynamicCollection<T> : LengthPrefixedCollection<T> {
+        [Browsable(false)]
         public int DynamicItemCount { get; private set; }
 
         protected override void ReadLength(BinaryReader reader) {
