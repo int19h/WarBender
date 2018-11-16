@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -8,9 +9,10 @@ using WarBender.Modules;
 
 namespace WarBender {
     public class Slots : LengthPrefixedCollection<long>, IList, IEnumerable<object> {
+        [Browsable(false)]
         public new IRecord Parent => (IRecord)((IDataObject)this).Parent;
 
-        public LengthPrefixedCollection<long> Raw => this;
+        private LengthPrefixedCollection<long> Raw => this;
 
         private IReadOnlyList<SlotDefinition> _slotDefinitions;
 
