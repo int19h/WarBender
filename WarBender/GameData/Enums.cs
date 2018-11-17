@@ -107,4 +107,10 @@ namespace WarBender.GameData {
         tf_guarantee_polearm = 0x08000000,
         tf_unmoveable_in_party_window = 0x10000000,
     }
+
+    [Flags]
+    public enum MapTrackFlags : byte {
+        mtf_battleground = 16,
+        mtf_spotted = 32,
+    }
 }

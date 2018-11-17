@@ -7,16 +7,16 @@ using System.Linq;
 using WarBender.Modules;
 
 namespace WarBender.GameData {
-    using MapIconId = EntityReference<MapIconDefinition>;
-    using MenuId = EntityReference<MenuDefinition>;
-    using ParticleSystemId = EntityReference<ParticleSystemDefinition>;
-    using TableauMaterialId = EntityReference<TableauMaterialDefinition>;
+    using MapIconId = EntityReference<MapIconDefinition, int>;
+    using MenuId = EntityReference<MenuDefinition, int>;
+    using ParticleSystemId = EntityReference<ParticleSystemDefinition, int>;
+    using TableauMaterialId = EntityReference<TableauMaterialDefinition, int>;
 
-    using FactionId = EntityReference<Faction>;
-    using ItemKindId = EntityReference<ItemKind>;
-    using PartyId = EntityReference<Party>;
-    using PartyTemplateId = EntityReference<PartyTemplate>;
-    using TroopId = EntityReference<Troop>;
+    using FactionId = EntityReference<Faction, int>;
+    using ItemKindId = EntityReference<ItemKind, int>;
+    using PartyId = EntityReference<Party, int>;
+    using PartyTemplateId = EntityReference<PartyTemplate, int>;
+    using TroopId = EntityReference<Troop, int>;
 
     public abstract partial class Trigger : Record<Trigger> {
         public abstract int status { get; set; }
@@ -35,7 +35,10 @@ namespace WarBender.GameData {
         public abstract float position_z { get; set; }
         public abstract float rotation { get; set; }
         public abstract float age { get; set; }
-        public abstract int flags { get; set; }
+        public abstract byte party_size { get; set; }
+        public abstract EntityReference<PartyTemplate, byte> party_template_id { get; set; }
+        public abstract byte strength { get; set; }
+        public abstract MapTrackFlags flags { get; set; }
     }
 
     public abstract partial class Note : Record<Note> {

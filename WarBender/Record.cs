@@ -75,14 +75,15 @@ namespace WarBender {
             OnPropertyChanged(new PropertyChangedEventArgs(name));
         }
 
-        protected void SetProperty<TEntity>(string name, ref EntityReference<TEntity> field, EntityReference<TEntity> value)
-            where TEntity : class, IEntity {
+        protected void SetProperty<TEntity, TIndex>(string name, ref EntityReference<TEntity, TIndex> field, EntityReference<TEntity, TIndex> value)
+            where TEntity : class, IEntity
+            where TIndex : struct, IConvertible, IEquatable<TIndex> {
 
-            if (field == value && field.Parent != null) {
+            if (field.Equals(value) && field.Parent != null) {
                 return;
             }
 
-            field = new EntityReference<TEntity>(this, value);
+            field = new EntityReference<TEntity, TIndex>(this, value);
             OnPropertyChanged(new PropertyChangedEventArgs(name));
         }
 

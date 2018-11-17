@@ -176,9 +176,9 @@ namespace WarBender.CodeGeneration {
             Type serType;
             if (type.IsEnum) {
                 serType = typeof(EnumSerializer<>).MakeGenericType(type);
-            } else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(EntityReference<>)) {
+            } else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(EntityReference<,>)) {
                 var targs = type.GetGenericArguments();
-                serType = typeof(EntityReferenceSerializer<>).MakeGenericType(targs[0]);
+                serType = typeof(EntityReferenceSerializer<,>).MakeGenericType(targs);
             } else {
                 return;
             }

@@ -55,7 +55,7 @@ namespace WarBender {
                 } else if (slotType.IsEnum) {
                     slot = Enum.ToObject(slotType, raw);
                 } else if (typeof(IEntity).IsAssignableFrom(slotType)) {
-                    slotType = typeof(EntityReference<>).MakeGenericType(slotType);
+                    slotType = typeof(EntityReference<,>).MakeGenericType(slotType, typeof(int));
                     slot = Activator.CreateInstance(slotType, (int)raw);
                 } else {
                     slot = ((IConvertible)raw).ToType(slotType, null);

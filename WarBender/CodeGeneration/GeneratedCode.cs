@@ -252,7 +252,34 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.flags = ValueSerializers._int.Read(reader);
+                    this.party_size = ValueSerializers._byte.Read(reader);
+                }
+                else
+                {
+                    this.party_size = default;
+                }
+
+                if (true)
+                {
+                    this.party_template_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_PartyTemplate_byte_.Read(reader);
+                }
+                else
+                {
+                    this.party_template_id = default;
+                }
+
+                if (true)
+                {
+                    this.strength = ValueSerializers._byte.Read(reader);
+                }
+                else
+                {
+                    this.strength = default;
+                }
+
+                if (true)
+                {
+                    this.flags = ValueSerializers._WarBender_GameData_MapTrackFlags.Read(reader);
                 }
                 else
                 {
@@ -291,7 +318,22 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._int.Write(writer, this.flags);
+                    ValueSerializers._byte.Write(writer, this.party_size);
+                }
+
+                if (true)
+                {
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_PartyTemplate_byte_.Write(writer, this.party_template_id);
+                }
+
+                if (true)
+                {
+                    ValueSerializers._byte.Write(writer, this.strength);
+                }
+
+                if (true)
+                {
+                    ValueSerializers._WarBender_GameData_MapTrackFlags.Write(writer, this.flags);
                 }
             }
 
@@ -345,8 +387,38 @@ namespace WarBender.GameData
                 }
             }
 
-            int _field__flags;
-            public override int flags
+            byte _field__party_size;
+            public override byte party_size
+            {
+                get => _field__party_size;
+                set
+                {
+                    SetProperty("party_size", ref _field__party_size, value);
+                }
+            }
+
+            WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte> _field__party_template_id;
+            public override WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte> party_template_id
+            {
+                get => _field__party_template_id;
+                set
+                {
+                    SetProperty("party_template_id", ref _field__party_template_id, value);
+                }
+            }
+
+            byte _field__strength;
+            public override byte strength
+            {
+                get => _field__strength;
+                set
+                {
+                    SetProperty("strength", ref _field__strength, value);
+                }
+            }
+
+            WarBender.GameData.MapTrackFlags _field__flags;
+            public override WarBender.GameData.MapTrackFlags flags
             {
                 get => _field__flags;
                 set
@@ -357,6 +429,7 @@ namespace WarBender.GameData
 
             public _Impl()
             {
+                party_template_id = default;
             }
         }
     }
@@ -403,7 +476,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.tableau_material_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_TableauMaterialDefinition_.Read(reader);
+                    this.tableau_material_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_TableauMaterialDefinition_int_.Read(reader);
                 }
                 else
                 {
@@ -436,7 +509,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_TableauMaterialDefinition_.Write(writer, this.tableau_material_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_TableauMaterialDefinition_int_.Write(writer, this.tableau_material_id);
                 }
 
                 if (true)
@@ -465,8 +538,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition> _field__tableau_material_id;
-            public override WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition> tableau_material_id
+            WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int> _field__tableau_material_id;
+            public override WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int> tableau_material_id
             {
                 get => _field__tableau_material_id;
                 set
@@ -623,7 +696,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.giver_troop_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Troop_.Read(reader);
+                    this.giver_troop_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Troop_int_.Read(reader);
                 }
                 else
                 {
@@ -705,7 +778,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Troop_.Write(writer, this.giver_troop_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Troop_int_.Write(writer, this.giver_troop_id);
                 }
 
                 if (true)
@@ -754,8 +827,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.GameData.Troop> _field__giver_troop_id;
-            public override WarBender.EntityReference<WarBender.GameData.Troop> giver_troop_id
+            WarBender.EntityReference<WarBender.GameData.Troop, int> _field__giver_troop_id;
+            public override WarBender.EntityReference<WarBender.GameData.Troop, int> giver_troop_id
             {
                 get => _field__giver_troop_id;
                 set
@@ -1133,7 +1206,7 @@ namespace WarBender.GameData
                 var bitFieldReader = new BitFieldReader();
                 if (true)
                 {
-                    this.troop_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Troop_.Read(reader);
+                    this.troop_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Troop_int_.Read(reader);
                 }
                 else
                 {
@@ -1174,7 +1247,7 @@ namespace WarBender.GameData
                 var bitFieldWriter = new BitFieldWriter();
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Troop_.Write(writer, this.troop_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Troop_int_.Write(writer, this.troop_id);
                 }
 
                 if (true)
@@ -1193,8 +1266,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.GameData.Troop> _field__troop_id;
-            public override WarBender.EntityReference<WarBender.GameData.Troop> troop_id
+            WarBender.EntityReference<WarBender.GameData.Troop, int> _field__troop_id;
+            public override WarBender.EntityReference<WarBender.GameData.Troop, int> troop_id
             {
                 get => _field__troop_id;
                 set
@@ -1309,7 +1382,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.menu_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_MenuDefinition_.Read(reader);
+                    this.menu_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_MenuDefinition_int_.Read(reader);
                 }
                 else
                 {
@@ -1318,7 +1391,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.party_template_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_PartyTemplate_.Read(reader);
+                    this.party_template_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_PartyTemplate_int_.Read(reader);
                 }
                 else
                 {
@@ -1327,7 +1400,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.faction_id = ValueSerializers._System_Nullable_WarBender_EntityReference_WarBender_GameData_Faction__.Read(reader);
+                    this.faction_id = ValueSerializers._System_Nullable_WarBender_EntityReference_WarBender_GameData_Faction_int__.Read(reader);
                 }
                 else
                 {
@@ -1570,7 +1643,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.banner_map_icon_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_MapIconDefinition_.Read(reader);
+                    this.banner_map_icon_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_MapIconDefinition_int_.Read(reader);
                 }
                 else
                 {
@@ -1579,7 +1652,7 @@ namespace WarBender.GameData
 
                 if (true && game.MatchVersions(1137, 2147483647))
                 {
-                    this.extra_map_icon_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_MapIconDefinition_.Read(reader);
+                    this.extra_map_icon_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_MapIconDefinition_int_.Read(reader);
                 }
                 else
                 {
@@ -1624,7 +1697,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.attached_to_party_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_.Read(reader);
+                    this.attached_to_party_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_int_.Read(reader);
                 }
                 else
                 {
@@ -1717,17 +1790,17 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_MenuDefinition_.Write(writer, this.menu_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_MenuDefinition_int_.Write(writer, this.menu_id);
                 }
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_PartyTemplate_.Write(writer, this.party_template_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_PartyTemplate_int_.Write(writer, this.party_template_id);
                 }
 
                 if (true)
                 {
-                    ValueSerializers._System_Nullable_WarBender_EntityReference_WarBender_GameData_Faction__.Write(writer, this.faction_id);
+                    ValueSerializers._System_Nullable_WarBender_EntityReference_WarBender_GameData_Faction_int__.Write(writer, this.faction_id);
                 }
 
                 if (true)
@@ -1862,12 +1935,12 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_MapIconDefinition_.Write(writer, this.banner_map_icon_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_MapIconDefinition_int_.Write(writer, this.banner_map_icon_id);
                 }
 
                 if (true && game.MatchVersions(1137, 2147483647))
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_MapIconDefinition_.Write(writer, this.extra_map_icon_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_MapIconDefinition_int_.Write(writer, this.extra_map_icon_id);
                 }
 
                 if (true && game.MatchVersions(1137, 2147483647))
@@ -1892,7 +1965,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_.Write(writer, this.attached_to_party_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_int_.Write(writer, this.attached_to_party_id);
                 }
 
                 if (true && game.MatchVersions(1162, 2147483647))
@@ -1976,8 +2049,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.Modules.MenuDefinition> _field__menu_id;
-            public override WarBender.EntityReference<WarBender.Modules.MenuDefinition> menu_id
+            WarBender.EntityReference<WarBender.Modules.MenuDefinition, int> _field__menu_id;
+            public override WarBender.EntityReference<WarBender.Modules.MenuDefinition, int> menu_id
             {
                 get => _field__menu_id;
                 set
@@ -1986,8 +2059,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.GameData.PartyTemplate> _field__party_template_id;
-            public override WarBender.EntityReference<WarBender.GameData.PartyTemplate> party_template_id
+            WarBender.EntityReference<WarBender.GameData.PartyTemplate, int> _field__party_template_id;
+            public override WarBender.EntityReference<WarBender.GameData.PartyTemplate, int> party_template_id
             {
                 get => _field__party_template_id;
                 set
@@ -1996,8 +2069,8 @@ namespace WarBender.GameData
                 }
             }
 
-            System.Nullable<WarBender.EntityReference<WarBender.GameData.Faction>> _field__faction_id;
-            public override System.Nullable<WarBender.EntityReference<WarBender.GameData.Faction>> faction_id
+            System.Nullable<WarBender.EntityReference<WarBender.GameData.Faction, int>> _field__faction_id;
+            public override System.Nullable<WarBender.EntityReference<WarBender.GameData.Faction, int>> faction_id
             {
                 get => _field__faction_id;
                 set
@@ -2246,8 +2319,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.Modules.MapIconDefinition> _field__banner_map_icon_id;
-            public override WarBender.EntityReference<WarBender.Modules.MapIconDefinition> banner_map_icon_id
+            WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int> _field__banner_map_icon_id;
+            public override WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int> banner_map_icon_id
             {
                 get => _field__banner_map_icon_id;
                 set
@@ -2256,8 +2329,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.Modules.MapIconDefinition> _field__extra_map_icon_id;
-            public override WarBender.EntityReference<WarBender.Modules.MapIconDefinition> extra_map_icon_id
+            WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int> _field__extra_map_icon_id;
+            public override WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int> extra_map_icon_id
             {
                 get => _field__extra_map_icon_id;
                 set
@@ -2306,8 +2379,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.GameData.Party> _field__attached_to_party_id;
-            public override WarBender.EntityReference<WarBender.GameData.Party> attached_to_party_id
+            WarBender.EntityReference<WarBender.GameData.Party, int> _field__attached_to_party_id;
+            public override WarBender.EntityReference<WarBender.GameData.Party, int> attached_to_party_id
             {
                 get => _field__attached_to_party_id;
                 set
@@ -2544,7 +2617,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.attacker_party_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_.Read(reader);
+                    this.attacker_party_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_int_.Read(reader);
                 }
                 else
                 {
@@ -2553,7 +2626,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.defender_party_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_.Read(reader);
+                    this.defender_party_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_int_.Read(reader);
                 }
                 else
                 {
@@ -2630,12 +2703,12 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_.Write(writer, this.attacker_party_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_int_.Write(writer, this.attacker_party_id);
                 }
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_.Write(writer, this.defender_party_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Party_int_.Write(writer, this.defender_party_id);
                 }
 
                 if (true)
@@ -2719,8 +2792,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.GameData.Party> _field__attacker_party_id;
-            public override WarBender.EntityReference<WarBender.GameData.Party> attacker_party_id
+            WarBender.EntityReference<WarBender.GameData.Party, int> _field__attacker_party_id;
+            public override WarBender.EntityReference<WarBender.GameData.Party, int> attacker_party_id
             {
                 get => _field__attacker_party_id;
                 set
@@ -2729,8 +2802,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.GameData.Party> _field__defender_party_id;
-            public override WarBender.EntityReference<WarBender.GameData.Party> defender_party_id
+            WarBender.EntityReference<WarBender.GameData.Party, int> _field__defender_party_id;
+            public override WarBender.EntityReference<WarBender.GameData.Party, int> defender_party_id
             {
                 get => _field__defender_party_id;
                 set
@@ -2840,7 +2913,7 @@ namespace WarBender.GameData
                 var bitFieldReader = new BitFieldReader();
                 if (true)
                 {
-                    this.item_kind_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_ItemKind_.Read(reader);
+                    this.item_kind_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_ItemKind_int_.Read(reader);
                 }
                 else
                 {
@@ -2881,7 +2954,7 @@ namespace WarBender.GameData
                 var bitFieldWriter = new BitFieldWriter();
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_ItemKind_.Write(writer, this.item_kind_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_ItemKind_int_.Write(writer, this.item_kind_id);
                 }
 
                 if (true)
@@ -2900,8 +2973,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.GameData.ItemKind> _field__item_kind_id;
-            public override WarBender.EntityReference<WarBender.GameData.ItemKind> item_kind_id
+            WarBender.EntityReference<WarBender.GameData.ItemKind, int> _field__item_kind_id;
+            public override WarBender.EntityReference<WarBender.GameData.ItemKind, int> item_kind_id
             {
                 get => _field__item_kind_id;
                 set
@@ -3282,7 +3355,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.faction_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Faction_.Read(reader);
+                    this.faction_id = ValueSerializers._WarBender_EntityReference_WarBender_GameData_Faction_int_.Read(reader);
                 }
                 else
                 {
@@ -3339,7 +3412,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Faction_.Write(writer, this.faction_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_GameData_Faction_int_.Write(writer, this.faction_id);
                 }
 
                 if (true)
@@ -3388,8 +3461,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.GameData.Faction> _field__faction_id;
-            public override WarBender.EntityReference<WarBender.GameData.Faction> faction_id
+            WarBender.EntityReference<WarBender.GameData.Faction, int> _field__faction_id;
+            public override WarBender.EntityReference<WarBender.GameData.Faction, int> faction_id
             {
                 get => _field__faction_id;
                 set
@@ -5678,7 +5751,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    this.current_menu_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_MenuDefinition_.Read(reader);
+                    this.current_menu_id = ValueSerializers._WarBender_EntityReference_WarBender_Modules_MenuDefinition_int_.Read(reader);
                 }
                 else
                 {
@@ -6128,7 +6201,7 @@ namespace WarBender.GameData
 
                 if (true)
                 {
-                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_MenuDefinition_.Write(writer, this.current_menu_id);
+                    ValueSerializers._WarBender_EntityReference_WarBender_Modules_MenuDefinition_int_.Write(writer, this.current_menu_id);
                 }
 
                 if (true)
@@ -6532,8 +6605,8 @@ namespace WarBender.GameData
                 }
             }
 
-            WarBender.EntityReference<WarBender.Modules.MenuDefinition> _field__current_menu_id;
-            public override WarBender.EntityReference<WarBender.Modules.MenuDefinition> current_menu_id
+            WarBender.EntityReference<WarBender.Modules.MenuDefinition, int> _field__current_menu_id;
+            public override WarBender.EntityReference<WarBender.Modules.MenuDefinition, int> current_menu_id
             {
                 get => _field__current_menu_id;
                 set
@@ -6748,177 +6821,201 @@ namespace WarBender
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<float> _float = ValueSerializer.Get<float>();
         [GeneratedCode("", "")]
+        public static readonly IValueSerializer<byte> _byte = ValueSerializer.Get<byte>();
+        [GeneratedCode("", "")]
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte>> _WarBender_EntityReference_WarBender_GameData_PartyTemplate_byte_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte>>();
+        [GeneratedCode("", "")]
+        public static readonly IValueSerializer<WarBender.GameData.MapTrackFlags> _WarBender_GameData_MapTrackFlags = ValueSerializer.Get<WarBender.GameData.MapTrackFlags>();
+        [GeneratedCode("", "")]
         public static readonly IValueSerializer<string> _string = ValueSerializer.Get<string>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition>> _WarBender_EntityReference_WarBender_Modules_TableauMaterialDefinition_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition>>();
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int>> _WarBender_EntityReference_WarBender_Modules_TableauMaterialDefinition_int_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int>>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<bool> _bool = ValueSerializer.Get<bool>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.Troop>> _WarBender_EntityReference_WarBender_GameData_Troop_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.Troop>>();
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.Troop, int>> _WarBender_EntityReference_WarBender_GameData_Troop_int_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.Troop, int>>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<System.Drawing.Color> _System_Drawing_Color = ValueSerializer.Get<System.Drawing.Color>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<WarBender.GameData.PartyFlags> _WarBender_GameData_PartyFlags = ValueSerializer.Get<WarBender.GameData.PartyFlags>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.Modules.MenuDefinition>> _WarBender_EntityReference_WarBender_Modules_MenuDefinition_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.Modules.MenuDefinition>>();
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.Modules.MenuDefinition, int>> _WarBender_EntityReference_WarBender_Modules_MenuDefinition_int_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.Modules.MenuDefinition, int>>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate>> _WarBender_EntityReference_WarBender_GameData_PartyTemplate_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.PartyTemplate>>();
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate, int>> _WarBender_EntityReference_WarBender_GameData_PartyTemplate_int_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.PartyTemplate, int>>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<System.Nullable<WarBender.EntityReference<WarBender.GameData.Faction>>> _System_Nullable_WarBender_EntityReference_WarBender_GameData_Faction__ = ValueSerializer.Get<System.Nullable<WarBender.EntityReference<WarBender.GameData.Faction>>>();
+        public static readonly IValueSerializer<System.Nullable<WarBender.EntityReference<WarBender.GameData.Faction, int>>> _System_Nullable_WarBender_EntityReference_WarBender_GameData_Faction_int__ = ValueSerializer.Get<System.Nullable<WarBender.EntityReference<WarBender.GameData.Faction, int>>>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<System.Nullable<WarBender.GameData.AIBehavior>> _System_Nullable_WarBender_GameData_AIBehavior_ = ValueSerializer.Get<System.Nullable<WarBender.GameData.AIBehavior>>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<WarBender.GameData.AIBehavior> _WarBender_GameData_AIBehavior = ValueSerializer.Get<WarBender.GameData.AIBehavior>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.Modules.MapIconDefinition>> _WarBender_EntityReference_WarBender_Modules_MapIconDefinition_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.Modules.MapIconDefinition>>();
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int>> _WarBender_EntityReference_WarBender_Modules_MapIconDefinition_int_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int>>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.Party>> _WarBender_EntityReference_WarBender_GameData_Party_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.Party>>();
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.Party, int>> _WarBender_EntityReference_WarBender_GameData_Party_int_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.Party, int>>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.ItemKind>> _WarBender_EntityReference_WarBender_GameData_ItemKind_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.ItemKind>>();
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.ItemKind, int>> _WarBender_EntityReference_WarBender_GameData_ItemKind_int_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.ItemKind, int>>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<ushort> _ushort = ValueSerializer.Get<ushort>();
-        [GeneratedCode("", "")]
-        public static readonly IValueSerializer<byte> _byte = ValueSerializer.Get<byte>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<WarBender.GameData.ItemModifier> _WarBender_GameData_ItemModifier = ValueSerializer.Get<WarBender.GameData.ItemModifier>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<uint> _uint = ValueSerializer.Get<uint>();
         [GeneratedCode("", "")]
-        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.Faction>> _WarBender_EntityReference_WarBender_GameData_Faction_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.Faction>>();
+        public static readonly IValueSerializer<WarBender.EntityReference<WarBender.GameData.Faction, int>> _WarBender_EntityReference_WarBender_GameData_Faction_int_ = ValueSerializer.Get<WarBender.EntityReference<WarBender.GameData.Faction, int>>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<WarBender.GameData.TroopFlags> _WarBender_GameData_TroopFlags = ValueSerializer.Get<WarBender.GameData.TroopFlags>();
         [GeneratedCode("", "")]
         public static readonly IValueSerializer<ulong> _ulong = ValueSerializer.Get<ulong>();
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition>>
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte>>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.Modules.TableauMaterialDefinition> _ser0 = new WarBender.EntityReferenceSerializer<WarBender.Modules.TableauMaterialDefinition>();
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.PartyTemplate, byte> _ser0 = new WarBender.EntityReferenceSerializer<WarBender.GameData.PartyTemplate, byte>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition> IValueSerializer<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition>>.Read(BinaryReader reader) => _ser0.Read(reader);
+        WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte> IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte>>.Read(BinaryReader reader) => _ser0.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition> value) => _ser0.Write(writer, value);
+        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.PartyTemplate, byte> value) => _ser0.Write(writer, value);
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.Troop>>
+    partial class ValueSerializer : IValueSerializer<WarBender.GameData.MapTrackFlags>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.Troop> _ser1 = new WarBender.EntityReferenceSerializer<WarBender.GameData.Troop>();
+        private static readonly WarBender.EnumSerializer<WarBender.GameData.MapTrackFlags> _ser1 = new WarBender.EnumSerializer<WarBender.GameData.MapTrackFlags>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.GameData.Troop> IValueSerializer<WarBender.EntityReference<WarBender.GameData.Troop>>.Read(BinaryReader reader) => _ser1.Read(reader);
+        WarBender.GameData.MapTrackFlags IValueSerializer<WarBender.GameData.MapTrackFlags>.Read(BinaryReader reader) => _ser1.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.Troop>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.Troop> value) => _ser1.Write(writer, value);
+        void IValueSerializer<WarBender.GameData.MapTrackFlags>.Write(BinaryWriter writer, WarBender.GameData.MapTrackFlags value) => _ser1.Write(writer, value);
+    }
+
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int>>
+    {
+        [GeneratedCode("", "")]
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.Modules.TableauMaterialDefinition, int> _ser2 = new WarBender.EntityReferenceSerializer<WarBender.Modules.TableauMaterialDefinition, int>();
+        [GeneratedCode("", "")]
+        WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int> IValueSerializer<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int>>.Read(BinaryReader reader) => _ser2.Read(reader);
+        [GeneratedCode("", "")]
+        void IValueSerializer<WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.Modules.TableauMaterialDefinition, int> value) => _ser2.Write(writer, value);
+    }
+
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.Troop, int>>
+    {
+        [GeneratedCode("", "")]
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.Troop, int> _ser3 = new WarBender.EntityReferenceSerializer<WarBender.GameData.Troop, int>();
+        [GeneratedCode("", "")]
+        WarBender.EntityReference<WarBender.GameData.Troop, int> IValueSerializer<WarBender.EntityReference<WarBender.GameData.Troop, int>>.Read(BinaryReader reader) => _ser3.Read(reader);
+        [GeneratedCode("", "")]
+        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.Troop, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.Troop, int> value) => _ser3.Write(writer, value);
     }
 
     partial class ValueSerializer : IValueSerializer<WarBender.GameData.PartyFlags>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EnumSerializer<WarBender.GameData.PartyFlags> _ser2 = new WarBender.EnumSerializer<WarBender.GameData.PartyFlags>();
+        private static readonly WarBender.EnumSerializer<WarBender.GameData.PartyFlags> _ser4 = new WarBender.EnumSerializer<WarBender.GameData.PartyFlags>();
         [GeneratedCode("", "")]
-        WarBender.GameData.PartyFlags IValueSerializer<WarBender.GameData.PartyFlags>.Read(BinaryReader reader) => _ser2.Read(reader);
+        WarBender.GameData.PartyFlags IValueSerializer<WarBender.GameData.PartyFlags>.Read(BinaryReader reader) => _ser4.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.GameData.PartyFlags>.Write(BinaryWriter writer, WarBender.GameData.PartyFlags value) => _ser2.Write(writer, value);
+        void IValueSerializer<WarBender.GameData.PartyFlags>.Write(BinaryWriter writer, WarBender.GameData.PartyFlags value) => _ser4.Write(writer, value);
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.Modules.MenuDefinition>>
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.Modules.MenuDefinition, int>>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.Modules.MenuDefinition> _ser3 = new WarBender.EntityReferenceSerializer<WarBender.Modules.MenuDefinition>();
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.Modules.MenuDefinition, int> _ser5 = new WarBender.EntityReferenceSerializer<WarBender.Modules.MenuDefinition, int>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.Modules.MenuDefinition> IValueSerializer<WarBender.EntityReference<WarBender.Modules.MenuDefinition>>.Read(BinaryReader reader) => _ser3.Read(reader);
+        WarBender.EntityReference<WarBender.Modules.MenuDefinition, int> IValueSerializer<WarBender.EntityReference<WarBender.Modules.MenuDefinition, int>>.Read(BinaryReader reader) => _ser5.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.Modules.MenuDefinition>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.Modules.MenuDefinition> value) => _ser3.Write(writer, value);
+        void IValueSerializer<WarBender.EntityReference<WarBender.Modules.MenuDefinition, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.Modules.MenuDefinition, int> value) => _ser5.Write(writer, value);
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate>>
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate, int>>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.PartyTemplate> _ser4 = new WarBender.EntityReferenceSerializer<WarBender.GameData.PartyTemplate>();
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.PartyTemplate, int> _ser6 = new WarBender.EntityReferenceSerializer<WarBender.GameData.PartyTemplate, int>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.GameData.PartyTemplate> IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate>>.Read(BinaryReader reader) => _ser4.Read(reader);
+        WarBender.EntityReference<WarBender.GameData.PartyTemplate, int> IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate, int>>.Read(BinaryReader reader) => _ser6.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.PartyTemplate> value) => _ser4.Write(writer, value);
+        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.PartyTemplate, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.PartyTemplate, int> value) => _ser6.Write(writer, value);
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.Faction>>
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.Faction, int>>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.Faction> _ser5 = new WarBender.EntityReferenceSerializer<WarBender.GameData.Faction>();
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.Faction, int> _ser7 = new WarBender.EntityReferenceSerializer<WarBender.GameData.Faction, int>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.GameData.Faction> IValueSerializer<WarBender.EntityReference<WarBender.GameData.Faction>>.Read(BinaryReader reader) => _ser5.Read(reader);
+        WarBender.EntityReference<WarBender.GameData.Faction, int> IValueSerializer<WarBender.EntityReference<WarBender.GameData.Faction, int>>.Read(BinaryReader reader) => _ser7.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.Faction>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.Faction> value) => _ser5.Write(writer, value);
+        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.Faction, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.Faction, int> value) => _ser7.Write(writer, value);
     }
 
     partial class ValueSerializer : IValueSerializer<WarBender.GameData.AIBehavior>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EnumSerializer<WarBender.GameData.AIBehavior> _ser6 = new WarBender.EnumSerializer<WarBender.GameData.AIBehavior>();
+        private static readonly WarBender.EnumSerializer<WarBender.GameData.AIBehavior> _ser8 = new WarBender.EnumSerializer<WarBender.GameData.AIBehavior>();
         [GeneratedCode("", "")]
-        WarBender.GameData.AIBehavior IValueSerializer<WarBender.GameData.AIBehavior>.Read(BinaryReader reader) => _ser6.Read(reader);
+        WarBender.GameData.AIBehavior IValueSerializer<WarBender.GameData.AIBehavior>.Read(BinaryReader reader) => _ser8.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.GameData.AIBehavior>.Write(BinaryWriter writer, WarBender.GameData.AIBehavior value) => _ser6.Write(writer, value);
+        void IValueSerializer<WarBender.GameData.AIBehavior>.Write(BinaryWriter writer, WarBender.GameData.AIBehavior value) => _ser8.Write(writer, value);
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.Modules.MapIconDefinition>>
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int>>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.Modules.MapIconDefinition> _ser7 = new WarBender.EntityReferenceSerializer<WarBender.Modules.MapIconDefinition>();
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.Modules.MapIconDefinition, int> _ser9 = new WarBender.EntityReferenceSerializer<WarBender.Modules.MapIconDefinition, int>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.Modules.MapIconDefinition> IValueSerializer<WarBender.EntityReference<WarBender.Modules.MapIconDefinition>>.Read(BinaryReader reader) => _ser7.Read(reader);
+        WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int> IValueSerializer<WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int>>.Read(BinaryReader reader) => _ser9.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.Modules.MapIconDefinition>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.Modules.MapIconDefinition> value) => _ser7.Write(writer, value);
+        void IValueSerializer<WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.Modules.MapIconDefinition, int> value) => _ser9.Write(writer, value);
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.Party>>
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.Party, int>>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.Party> _ser8 = new WarBender.EntityReferenceSerializer<WarBender.GameData.Party>();
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.Party, int> _ser10 = new WarBender.EntityReferenceSerializer<WarBender.GameData.Party, int>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.GameData.Party> IValueSerializer<WarBender.EntityReference<WarBender.GameData.Party>>.Read(BinaryReader reader) => _ser8.Read(reader);
+        WarBender.EntityReference<WarBender.GameData.Party, int> IValueSerializer<WarBender.EntityReference<WarBender.GameData.Party, int>>.Read(BinaryReader reader) => _ser10.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.Party>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.Party> value) => _ser8.Write(writer, value);
+        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.Party, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.Party, int> value) => _ser10.Write(writer, value);
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition>>
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition, int>>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.Modules.ParticleSystemDefinition> _ser9 = new WarBender.EntityReferenceSerializer<WarBender.Modules.ParticleSystemDefinition>();
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.Modules.ParticleSystemDefinition, int> _ser11 = new WarBender.EntityReferenceSerializer<WarBender.Modules.ParticleSystemDefinition, int>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition> IValueSerializer<WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition>>.Read(BinaryReader reader) => _ser9.Read(reader);
+        WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition, int> IValueSerializer<WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition, int>>.Read(BinaryReader reader) => _ser11.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition> value) => _ser9.Write(writer, value);
+        void IValueSerializer<WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.Modules.ParticleSystemDefinition, int> value) => _ser11.Write(writer, value);
     }
 
-    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.ItemKind>>
+    partial class ValueSerializer : IValueSerializer<WarBender.EntityReference<WarBender.GameData.ItemKind, int>>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.ItemKind> _ser10 = new WarBender.EntityReferenceSerializer<WarBender.GameData.ItemKind>();
+        private static readonly WarBender.EntityReferenceSerializer<WarBender.GameData.ItemKind, int> _ser12 = new WarBender.EntityReferenceSerializer<WarBender.GameData.ItemKind, int>();
         [GeneratedCode("", "")]
-        WarBender.EntityReference<WarBender.GameData.ItemKind> IValueSerializer<WarBender.EntityReference<WarBender.GameData.ItemKind>>.Read(BinaryReader reader) => _ser10.Read(reader);
+        WarBender.EntityReference<WarBender.GameData.ItemKind, int> IValueSerializer<WarBender.EntityReference<WarBender.GameData.ItemKind, int>>.Read(BinaryReader reader) => _ser12.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.ItemKind>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.ItemKind> value) => _ser10.Write(writer, value);
+        void IValueSerializer<WarBender.EntityReference<WarBender.GameData.ItemKind, int>>.Write(BinaryWriter writer, WarBender.EntityReference<WarBender.GameData.ItemKind, int> value) => _ser12.Write(writer, value);
     }
 
     partial class ValueSerializer : IValueSerializer<WarBender.GameData.ItemModifier>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EnumSerializer<WarBender.GameData.ItemModifier> _ser11 = new WarBender.EnumSerializer<WarBender.GameData.ItemModifier>();
+        private static readonly WarBender.EnumSerializer<WarBender.GameData.ItemModifier> _ser13 = new WarBender.EnumSerializer<WarBender.GameData.ItemModifier>();
         [GeneratedCode("", "")]
-        WarBender.GameData.ItemModifier IValueSerializer<WarBender.GameData.ItemModifier>.Read(BinaryReader reader) => _ser11.Read(reader);
+        WarBender.GameData.ItemModifier IValueSerializer<WarBender.GameData.ItemModifier>.Read(BinaryReader reader) => _ser13.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.GameData.ItemModifier>.Write(BinaryWriter writer, WarBender.GameData.ItemModifier value) => _ser11.Write(writer, value);
+        void IValueSerializer<WarBender.GameData.ItemModifier>.Write(BinaryWriter writer, WarBender.GameData.ItemModifier value) => _ser13.Write(writer, value);
     }
 
     partial class ValueSerializer : IValueSerializer<WarBender.GameData.TroopFlags>
     {
         [GeneratedCode("", "")]
-        private static readonly WarBender.EnumSerializer<WarBender.GameData.TroopFlags> _ser12 = new WarBender.EnumSerializer<WarBender.GameData.TroopFlags>();
+        private static readonly WarBender.EnumSerializer<WarBender.GameData.TroopFlags> _ser14 = new WarBender.EnumSerializer<WarBender.GameData.TroopFlags>();
         [GeneratedCode("", "")]
-        WarBender.GameData.TroopFlags IValueSerializer<WarBender.GameData.TroopFlags>.Read(BinaryReader reader) => _ser12.Read(reader);
+        WarBender.GameData.TroopFlags IValueSerializer<WarBender.GameData.TroopFlags>.Read(BinaryReader reader) => _ser14.Read(reader);
         [GeneratedCode("", "")]
-        void IValueSerializer<WarBender.GameData.TroopFlags>.Write(BinaryWriter writer, WarBender.GameData.TroopFlags value) => _ser12.Write(writer, value);
+        void IValueSerializer<WarBender.GameData.TroopFlags>.Write(BinaryWriter writer, WarBender.GameData.TroopFlags value) => _ser14.Write(writer, value);
     }
 
     namespace CodeGeneration
@@ -6926,7 +7023,7 @@ namespace WarBender
         partial class RecordTypes
         {
             [GeneratedCode("", "")]
-            static partial void GetGeneratedCodeHash(ref int hash) => hash = 1805939702;
+            static partial void GetGeneratedCodeHash(ref int hash) => hash = 1980424193;
         }
     }
 }

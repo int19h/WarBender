@@ -17,11 +17,12 @@ namespace WarBender {
         IEntityReference WithIndex(int value);
     }
 
-    public struct EntityReference<T> : IEntityReference, IEquatable<EntityReference<T>>
-        where T : class, IEntity {
+    public struct EntityReference<TEntity, TIndex> : IEntityReference, IEquatable<EntityReference<TEntity, TIndex>>
+        where TEntity : class, IEntity
+        where TIndex : struct, IConvertible, IEquatable<TIndex> {
 
         [Browsable(false)]
-        public Type EntityType => typeof(T);
+        public Type EntityType => typeof(TEntity);
 
         [Browsable(false)]
         public IDataObject Parent { get; private set; }
@@ -33,11 +34,11 @@ namespace WarBender {
             Index = index;
         }
 
-        internal EntityReference(IDataObject parent, T entity)
+        internal EntityReference(IDataObject parent, TEntity entity)
             : this(parent, entity?.Index ?? -1) {
         }
 
-        internal EntityReference(IDataObject parent, EntityReference<T> other)
+        internal EntityReference(IDataObject parent, EntityReference<TEntity, TIndex> other)
             : this(parent, other.Index) {
         }
 
@@ -45,26 +46,26 @@ namespace WarBender {
             : this(null, index) {
         }
 
-        public EntityReference(T entity)
+        public EntityReference(TEntity entity)
             : this(null, entity) {
         }
 
-        public EntityReference(EntityReference<T> other)
+        public EntityReference(EntityReference<TEntity, TIndex> other)
             : this(null, other) {
         }
 
-        public static implicit operator int(EntityReference<T> eref) => eref.Index;
+        public static implicit operator int(EntityReference<TEntity, TIndex> eref) => eref.Index;
 
-        public static implicit operator T(EntityReference<T> eref) => eref.Entity;
+        public static implicit operator TEntity(EntityReference<TEntity, TIndex> eref) => eref.Entity;
 
-        public static implicit operator EntityReference<T>(int index) => new EntityReference<T>(index);
+        public static implicit operator EntityReference<TEntity, TIndex>(int index) => new EntityReference<TEntity, TIndex>(index);
 
-        public static implicit operator EntityReference<T>(T entity) => new EntityReference<T>(entity);
+        public static implicit operator EntityReference<TEntity, TIndex>(TEntity entity) => new EntityReference<TEntity, TIndex>(entity);
 
-        public bool Equals(EntityReference<T> other) => Index == other.Index;
+        public bool Equals(EntityReference<TEntity, TIndex> other) => Index.Equals(other.Index);
 
         public override bool Equals(object obj) =>
-            obj is EntityReference<T> other ? Equals(other) : false;
+            obj is EntityReference<TEntity, TIndex> other ? Equals(other) : false;
 
         public override int GetHashCode() => Index.GetHashCode();
 
@@ -78,30 +79,34 @@ namespace WarBender {
             return this;
         }
 
-        public T Entity {
+        public TEntity Entity {
             get {
                 var entities = Entities;
-                if (Index < 0 || Index >= entities.Count) {
+                var index = ((IEntityReference)this).Index;
+                if (index < 0 || index >= entities.Count) {
                     return null;
                 }
-                return entities[Index];
+                return entities[index];
             }
         }
 
-        private IReadOnlyList<T> Entities => this.Game().Entities.GetEntities<T>();
+        private IReadOnlyList<TEntity> Entities => this.Game().Entities.GetEntities<TEntity>();
 
         IEntity IEntityReference.Entity => Entity;
 
         IList IEntityReference.Entities => (IList)Entities;
     }
 
-    internal class EntityReferenceSerializer<T> : IValueSerializer<EntityReference<T>>
-        where T : class, IEntity {
+    internal class EntityReferenceSerializer<TEntity, TIndex> : IValueSerializer<EntityReference<TEntity, TIndex>>
+        where TEntity : class, IEntity
+        where TIndex : struct, IConvertible, IEquatable<TIndex> {
 
-        public static readonly EntityReferenceSerializer<T> Instance = new EntityReferenceSerializer<T>();
+        public static readonly EntityReferenceSerializer<TEntity, TIndex> Instance = new EntityReferenceSerializer<TEntity, TIndex>();
 
-        public EntityReference<T> Read(BinaryReader reader) => reader.ReadInt32();
+        private static readonly IValueSerializer<TIndex> _valueSerializer = ValueSerializer.Get<TIndex>();
 
-        public void Write(BinaryWriter writer, EntityReference<T> value) => writer.Write(value.Index);
+        public EntityReference<TEntity, TIndex> Read(BinaryReader reader) => new EntityReference<TEntity, TIndex>(Convert.ToInt32(_valueSerializer.Read(reader)));
+
+        public void Write(BinaryWriter writer, EntityReference<TEntity, TIndex> value) => _valueSerializer.Write(writer, (TIndex)Convert.ChangeType(value.Index, typeof(TIndex)));
     }
 }

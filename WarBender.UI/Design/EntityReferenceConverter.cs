@@ -12,7 +12,7 @@ namespace WarBender.UI.Design {
                 if (erefType.IsGenericType && erefType.GetGenericTypeDefinition() == typeof(Nullable<>)) {
                     erefType = erefType.GenericTypeArguments[0];
                 }
-                if (erefType.IsGenericType && erefType.GetGenericTypeDefinition() == typeof(EntityReference<>)) {
+                if (erefType.IsGenericType && erefType.GetGenericTypeDefinition() == typeof(EntityReference<,>)) {
                     return erefType;
                 }
             }
