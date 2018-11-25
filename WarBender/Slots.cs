@@ -12,7 +12,8 @@ namespace WarBender {
         [Browsable(false)]
         public new IRecord Parent => (IRecord)((IDataObject)this).Parent;
 
-        private LengthPrefixedCollection<long> Raw => this;
+        [Browsable(false)]
+        public LengthPrefixedCollection<long> Raw => this;
 
         private IReadOnlyList<SlotDefinition> _slotDefinitions;
 
