@@ -72,6 +72,11 @@ namespace WarBender {
                 Raw[index] = RawValue(value);
         }
 
+        public new object this[string key] {
+            get => this[GetIndexOfKey(key)];
+            set => this[GetIndexOfKey(key)] = value;
+        }
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public new IEnumerator<object> GetEnumerator() {
