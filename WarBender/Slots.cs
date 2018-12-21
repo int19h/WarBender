@@ -2,20 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using WarBender.Modules;
 
 namespace WarBender {
-    public class Slots : LengthPrefixedCollection<long>, IList, IEnumerable<object> {
-        [Browsable(false)]
-        public new IRecord Parent => (IRecord)((IDataObject)this).Parent;
-
-        [Browsable(false)]
-        public LengthPrefixedCollection<long> Raw => this;
-
+    public class Slots : IDataObject, ICollection, IList<object> {
         private IReadOnlyList<SlotDefinition> _slotDefinitions;
+
+        public Slots() {
+        }
+
+        [ParenthesizePropertyName(true)]
+        public LengthPrefixedCollection<long> Raw { get; } = new LengthPrefixedCollection<long>();
 
         public IReadOnlyList<SlotDefinition> SlotDefinitions {
             get {
@@ -27,76 +29,17 @@ namespace WarBender {
             }
         }
 
-        protected override void SetParent(IDataObject parent) {
+        public IDataObjectChild WithParent(IDataObject parent, int index = -1) {
             if (!(parent is IRecord)) {
-                throw new InvalidOperationException($"{nameof(Slots)} must have a record as parent");
+                throw new ArgumentOutOfRangeException(nameof(parent));
             }
 
-            _slotDefinitions = null;
-            base.SetParent(parent);
+            var raw = ((IDataObject)Raw).WithParent(parent, index);
+            Trace.Assert(Raw == raw);
+            return this;
         }
 
-        protected override void OnItemAdded(long item, int index) {
-            base.OnItemAdded(item, index);
-            if (_slotDefinitions != null && Count > _slotDefinitions.Count) {
-                _slotDefinitions = null;
-            }
-        }
-
-        public override string GetKeyOfIndex(int index) => SlotDefinitions[index].Name;
-
-        public new object this[int index] {
-            get {
-                var raw = Raw[index];
-                var slotType = SlotDefinitions[index].Type;
-
-                object slot;
-                if (typeof(Color) == slotType) {
-                    slot = Color.FromArgb((int)raw);
-                } else if (slotType.IsEnum) {
-                    slot = Enum.ToObject(slotType, raw);
-                } else if (typeof(IEntity).IsAssignableFrom(slotType)) {
-                    slotType = typeof(EntityReference<,>).MakeGenericType(slotType, typeof(int));
-                    slot = Activator.CreateInstance(slotType, (int)raw);
-                } else {
-                    slot = ((IConvertible)raw).ToType(slotType, null);
-                }
-
-                if (slot is IDataObjectChild child) {
-                    slot = child.WithParent(this, index);
-                }
-
-                return slot;
-            }
-            set =>
-                Raw[index] = RawValue(value);
-        }
-
-        public new object this[string key] {
-            get => this[GetIndexOfKey(key)];
-            set => this[GetIndexOfKey(key)] = value;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        public new IEnumerator<object> GetEnumerator() {
-            for (int i = 0; i < Count; ++i) {
-                yield return this[i];
-            }
-        }
-
-        int IList.Add(object value) {
-            Raw.Add(RawValue(value));
-            return Count - 1;
-        }
-
-        bool IList.Contains(object value) => Raw.Contains(RawValue(value));
-
-        int IList.IndexOf(object value) => Raw.IndexOf(RawValue(value));
-
-        void IList.Insert(int index, object value) => Raw.Insert(index, RawValue(value));
-
-        void IList.Remove(object value) => Raw.Remove(RawValue(value));
+        public string GetKeyOfIndex(int index) => index < SlotDefinitions.Count ? SlotDefinitions[index].Name : null;
 
         private static long RawValue(object value) =>
             value == null ? -1 :
@@ -105,5 +48,99 @@ namespace WarBender {
             value is IConvertible conv ? conv.ToInt64(CultureInfo.InvariantCulture) :
             value is Color color ? color.ToArgb() :
             throw new ArgumentOutOfRangeException("value");
+
+        private object TypedValue(long value, int index) {
+            if (index >= SlotDefinitions.Count) {
+                return value;
+            }
+
+            var raw = Raw[index];
+            var slotType = SlotDefinitions[index].Type;
+
+            object slot;
+            if (typeof(Color) == slotType) {
+                slot = Color.FromArgb((int)raw);
+            } else if (slotType.IsEnum) {
+                slot = Enum.ToObject(slotType, raw);
+            } else if (typeof(IEntity).IsAssignableFrom(slotType)) {
+                slotType = typeof(EntityReference<,>).MakeGenericType(slotType, typeof(int));
+                slot = Activator.CreateInstance(slotType, (int)raw);
+            } else {
+                slot = ((IConvertible)raw).ToType(slotType, null);
+            }
+
+            if (slot is IDataObjectChild child) {
+                slot = child.WithParent(this, index);
+            }
+
+            return slot;
+        }
+
+        public object this[int index] {
+            get => TypedValue(Raw[index], index);
+            set => Raw[index] = RawValue(value);
+        }
+
+        public IEnumerator<object> GetEnumerator() => Raw.Select((x, i) => TypedValue(x, i)).GetEnumerator();
+
+        public int Add(object value) => ((ICollection)Raw).Add(RawValue(value));
+
+        public int GetLength() => Raw.GetLength();
+
+        public bool Contains(object value) => Raw.Contains(RawValue(value));
+
+        public void Clear() => Raw.Clear();
+
+        public int IndexOf(object value) =>Raw.IndexOf(RawValue(value));
+
+        public void Insert(int index, object value) => ((ICollection)Raw).Insert(index, RawValue(value));
+
+        public void Remove(object value) => ((ICollection)Raw).Remove(RawValue(value));
+
+        public void RemoveAt(int index) => Raw.RemoveAt(index);
+
+        public void CopyTo(Array array, int index) {
+            foreach (var value in this) {
+                array.SetValue(value, index++);
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        void ICollection<object>.Add(object item) => Add(RawValue(item));
+
+        public void CopyTo(object[] array, int arrayIndex) => CopyTo(array, arrayIndex);
+
+        bool ICollection<object>.Remove(object item) => Raw.Remove(RawValue(item));
+
+        [ParenthesizePropertyName(true)]
+        public long SizeInBytes => Raw.SizeInBytes;
+
+        IDataObject IDataObjectChild.Parent => Raw.Parent;
+
+        [Browsable(false)]
+        IRecord Parent => (IRecord)Raw.Parent;
+
+        [Browsable(false)]
+        public Type ItemType => Raw.ItemType;
+
+        [Browsable(false)]
+        public bool IsReadOnly => ((ICollection)Raw).IsReadOnly;
+
+        [Browsable(false)]
+        public bool IsFixedSize => ((ICollection)Raw).IsFixedSize;
+
+        [ParenthesizePropertyName(true)]
+        public int Count => Raw.Count;
+
+        [Browsable(false)]
+        public object SyncRoot => ((ICollection)Raw).SyncRoot;
+
+        [Browsable(false)]
+        public bool IsSynchronized => ((ICollection)Raw).IsSynchronized;
+
+        public void ReadFrom(BinaryReader reader) => Raw.ReadFrom(reader);
+
+        public void WriteTo(BinaryWriter writer) => Raw.WriteTo(writer);
     }
 }
